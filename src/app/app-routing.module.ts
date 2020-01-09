@@ -7,6 +7,7 @@ import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterModule } from './register/register.module';
+import { ActiveRecordModule } from './active-record/active-record.module';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterModule
+  },
+  {
+    path: 'entries',
+    component: ActiveRecordModule
   }
 ];
 

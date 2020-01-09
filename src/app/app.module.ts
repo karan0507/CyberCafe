@@ -19,17 +19,21 @@ import { RegisterModule } from './register/register.module';
 import { from } from 'rxjs';
 import { DatabaseServiceService } from './database-service.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ActiveRecordComponent } from './active-record/active-record.component';
+import { ActiveRecordModule } from './active-record/active-record.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
+    FooterComponent
   ],
   entryComponents: [
     LoginComponent
   ],
   imports: [
+    ActiveRecordModule,
     RegisterModule,
     HttpClientModule,
     LoginModule,
