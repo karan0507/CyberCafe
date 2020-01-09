@@ -17,18 +17,21 @@ import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
 // import { server } from '../assets/server.js';
 import { from } from 'rxjs';
+import { ActiveRecordComponent } from './active-record/active-record.component';
+import { ActiveRecordModule } from './active-record/active-record.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
+    FooterComponent
   ],
   entryComponents: [
     LoginComponent
   ],
   imports: [
+    ActiveRecordModule,
     RegisterModule,
     LoginModule,
     HomeModule,
