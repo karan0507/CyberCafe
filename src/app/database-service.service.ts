@@ -1,34 +1,27 @@
 
 import { Injectable } from '@angular/core';
-import * as mysql from 'mysql';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DatabaseServiceService {
+    pal = {name: '1', description: 'shasd', date: 'sa'};
+    resturl = 'http://localhost:8080/';
+    constructor(private http: HttpClient) {
 
-  constructor() {
+    }
 
-  }
+    login(): Observable<any> {
+     return this.http.get(this.resturl + 'login');
+    }
 
-  db() {
-    const dbconn = mysql.createConnection({
-      host: 'localhost',
-          user: 'root',
-          password: 'ac0de52dh',
-          database: 'electron'
-    });
+    createPost() {
+        console.log(this.pal);
+        this.http.post('http://localhost:8080/' + 'customer' , this.pal).subscribe(res => console.log(res));
+    }
 
-    dbconn.connect();
-    dbconn.query('CREATE TABLE IF NOT EXISTS contacts(id INT, name VARCHAR(50), email VARCHAR(100))',
-      (err) => {
-        if (err) {
-          console.log('Error!', err);
-        } else {
-          console.log('sucess');
-        }
-      }
-    );
-  }
 
 }

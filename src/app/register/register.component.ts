@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseServiceService } from '../database-service.service';
+// import { DatabaseServiceService } from '../database-service.service';
 
 @Component({
   selector: 'app-register',
@@ -13,5 +14,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
+  getpost() {
+    console.log('i am getting called');
+    this.db.createPost();
+  }
 
 }

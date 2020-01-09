@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
-
+server = require('./src/server')
 let win;
 
 function createWindow() {
@@ -37,3 +37,5 @@ app.on('activate', () => {
         createWindow();
     }
 });
+
+// get the client

@@ -17,7 +17,8 @@ import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
 // import { server } from '../assets/server.js';
 import { from } from 'rxjs';
-
+import { DatabaseServiceService } from './database-service.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { from } from 'rxjs';
   ],
   imports: [
     RegisterModule,
+    HttpClientModule,
     LoginModule,
     HomeModule,
     HeaderModule,
@@ -37,7 +39,7 @@ import { from } from 'rxjs';
     AppRoutingModule,
     RouterModule
   ],
-  providers: [],
+  providers: [DatabaseServiceService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
