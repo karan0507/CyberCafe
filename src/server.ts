@@ -1,5 +1,5 @@
 
-// const mysql = require('mysql2');
+// const mysql = require('mysql');
 
 // const connection = mysql.createConnection({
 //     host: 'localhost',
@@ -13,9 +13,9 @@
 // connection.query('CREATE TABLE IF NOT EXISTS contacts(id INT, name VARCHAR(50), email VARCHAR(100))',
 //     (err) => {
 //         if (err) {
-//             console.log("Error!", err);
+//             console.log('Error!', err);
 //         } else {
-//             console.log("sucess");
+//             console.log('sucess');
 //         }
 //     }
 // );

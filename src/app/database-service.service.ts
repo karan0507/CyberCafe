@@ -1,29 +1,34 @@
-// import { Injectable } from '@angular/core';
-// require('src/server');
-// import { from } from 'rxjs';
 
-
-// export const connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'ac0de52dh',
-//   database: 'electron'
-// });
-
-// connection.connect();
+import { Injectable } from '@angular/core';
+import * as mysql from 'mysql';
 
 // @Injectable({
 //   providedIn: 'root'
 // })
 // export class DatabaseServiceService {
 
+  constructor() {
 
-//   // connection.connect();
+  }
 
+  db() {
+    const dbconn = mysql.createConnection({
+      host: 'localhost',
+          user: 'root',
+          password: 'ac0de52dh',
+          database: 'electron'
+    });
 
-//   constructor() { }
+    dbconn.connect();
+    dbconn.query('CREATE TABLE IF NOT EXISTS contacts(id INT, name VARCHAR(50), email VARCHAR(100))',
+      (err) => {
+        if (err) {
+          console.log('Error!', err);
+        } else {
+          console.log('sucess');
+        }
+      }
+    );
+  }
 
-//   db() {
-//     console.log();
-//   }
-// }
+}
