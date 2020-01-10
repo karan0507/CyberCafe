@@ -1,11 +1,16 @@
 const express = require('express');
+var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 function createRouter(db) {
     const router = express.Router();
     const owner = '';
     console.log("I am getting called");
-
-    // the routes are defined here
+    io.on('connection', () => {
+            console.log('a user is connected')
+        })
+        // the routes are defined here
     router.post('/login', (req, res, next) => {
         console.log("accessed event");
         db.query(
@@ -60,6 +65,7 @@ function createRouter(db) {
                     res.status(500).json({ status: 'error' });
                 } else {
                     res.status(200).json(results);
+                    io.emit('Data of Customers', results);
                 }
             }
         );
@@ -81,7 +87,7 @@ function createRouter(db) {
 
     router.put('/customer/:id', function(req, res, next) {
         db.query(
-            'UPDATE customer WHERE id=? ', [req.body.name, req.body.phone_no, req.body.address, req.body.profile_pic, req.body.id_proof, req.body.email_address, req.body.remark],
+            'UPDATE customer SET name=?, phone_no=?, address=?, profile_pic=?, id_proof=?, email_address=?, remark=? WHERE id=? ', [req.body.name, req.body.phone_no, req.body.address, req.body.profile_pic, req.body.id_proof, req.body.email_address, req.body.remark, req.params.id],
             (error) => {
                 if (error) {
                     console.log(error);
