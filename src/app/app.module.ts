@@ -22,6 +22,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActiveRecordComponent } from './active-record/active-record.component';
 import { ActiveRecordModule } from './active-record/active-record.module';
 import { SidenavModule } from './sidenav/sidenav.module';
+import { RecordListComponent } from './record-list/record-list.component';
+import { RecordListModule } from './record-list/record-list.module';
 
 
 
@@ -29,11 +31,13 @@ import { SidenavModule } from './sidenav/sidenav.module';
   declarations: [
     AppComponent,
     FooterComponent
+  
   ],
   entryComponents: [
     LoginComponent
   ],
   imports: [
+    RecordListModule,
     ActiveRecordModule,
     RegisterModule,
     HttpClientModule,

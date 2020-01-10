@@ -11,6 +11,15 @@ function createRouter(db) {
             console.log('a user is connected')
         })
         // the routes are defined here
+
+    // the routes are defined here
+
+
+
+    // Write create Table queries directly here 
+
+
+    // Write all CRUD Operations with router.post()/router.get() and etc
     router.post('/login', (req, res, next) => {
         console.log("accessed event");
         db.query(
@@ -66,6 +75,22 @@ function createRouter(db) {
                 } else {
                     res.status(200).json(results);
                     io.emit('Data of Customers', results);
+                }
+            }
+        );
+    });
+
+    // get customer by id
+
+    router.get('/customer/:id', function(req, res, next) {
+        db.query(
+            'SELECT * FROM customer WHERE id=?', [req.params.id],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json(results);
                 }
             }
         );

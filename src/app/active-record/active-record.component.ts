@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { DatabaseServiceService } from '../database-service.service';
 
 
 @Component({
@@ -11,7 +12,10 @@ export class ActiveRecordComponent implements OnInit {
   
  name: Array<any> = ['hello','yash','where','is','your','office','sejal','also','works','there','kya?'];
 
-  constructor() { }
+  constructor(private db: DatabaseServiceService) { 
+
+    
+  }
 
   ngOnInit() {
   }
