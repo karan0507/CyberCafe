@@ -6,6 +6,13 @@ function createRouter(db) {
     console.log("I am getting called");
 
     // the routes are defined here
+
+
+
+    // Write create Table queries directly here 
+
+
+    // Write all CRUD Operations with router.post()/router.get() and etc
     router.post('/login', (req, res, next) => {
         console.log("accessed event");
         db.query(
