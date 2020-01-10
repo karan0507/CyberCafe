@@ -21,6 +21,7 @@ import { DatabaseServiceService } from './database-service.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActiveRecordComponent } from './active-record/active-record.component';
 import { ActiveRecordModule } from './active-record/active-record.module';
+import { SidenavModule } from './sidenav/sidenav.module';
 
 
 
@@ -39,6 +40,7 @@ import { ActiveRecordModule } from './active-record/active-record.module';
     LoginModule,
     HomeModule,
     HeaderModule,
+    SidenavModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule

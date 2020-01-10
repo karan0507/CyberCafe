@@ -45,11 +45,54 @@ function createRouter(db) {
     router.post('/customer', (req, res, next) => {
         console.log("accessed customer");
         db.query(
-            'INSERT INTO customer (name, phone_no, address, profile_pic, id_proof, email_address) VALUES (?,?,?,?,?,?)', [req.body.name, req.body.phone_no, req.body.address, req.body.profile_pic, req.body.id_proof, req.body.email_address],
+            'INSERT INTO customer (name, phone_no, address, profile_pic, id_proof, email_address, remark) VALUES (?,?,?,?,?,?,?)', [req.body.name, req.body.phone_no, req.body.address, req.body.profile_pic, req.body.id_proof, req.body.email_address, req.body.remark],
             (error) => {
                 if (error) {
                     console.error(error);
                     res.status(500).json({ status: 'adsadasdas' });
+                } else {
+                    res.status(200).json({ status: 'ok' });
+                }
+            }
+        );
+    });
+
+    router.get('/customer', (req, res, next) => {
+        console.log("accessed customer");
+        db.query(
+            'Select * FROM customer',
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
+    router.delete('/customer/:id', function(req, res, next) {
+        db.query(
+            'DELETE FROM customer WHERE id=?', [req.params.id],
+            (error) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json({ status: 'ok' });
+                }
+            }
+        );
+    });
+
+    router.put('/customer/:id', function(req, res, next) {
+        db.query(
+            'UPDATE customer WHERE id=? ', [req.body.name, req.body.phone_no, req.body.address, req.body.profile_pic, req.body.id_proof, req.body.email_address, req.body.remark],
+            (error) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
                 } else {
                     res.status(200).json({ status: 'ok' });
                 }
