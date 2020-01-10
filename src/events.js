@@ -72,6 +72,22 @@ function createRouter(db) {
         );
     });
 
+    // get customer by id
+
+    router.get('/customer/:id', function(req, res, next) {
+        db.query(
+            'SELECT * FROM customer WHERE id=?' ,[req.params.id],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
     router.delete('/customer/:id', function(req, res, next) {
         db.query(
             'DELETE FROM customer WHERE id=?', [req.params.id],

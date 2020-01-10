@@ -23,5 +23,9 @@ export class DatabaseServiceService {
         this.http.post('http://localhost:8080/' + 'customer' , this.pal).subscribe(res => console.log(res));
     }
 
+    listAllCustomers(): Observable<any> {
+        return this.http.get(this.resturl + 'customer');
+
+    }
 
 }
