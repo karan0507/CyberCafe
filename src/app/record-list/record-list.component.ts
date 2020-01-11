@@ -14,7 +14,7 @@ import { DatabaseServiceService } from '../database-service.service';
   styleUrls: ['./record-list.component.scss']
 })
 export class RecordListComponent implements OnInit {
-
+  searchText;
   Sr_no = 'Sr.no';
   index = 1;
   Name = 'Name';
@@ -30,17 +30,16 @@ export class RecordListComponent implements OnInit {
   }
 
   onKey(event: any) { // without type info
-    ;
+
   }
 
 
-  getCustomers(){
-    this.db.listAllCustomers().subscribe(data =>
-  {
+  getCustomers() {
+    this.db.listAllCustomers().subscribe(data => {
     console.log(data);
-    this.customers= data;
+    this.customers = data;
 
-  })
+  });
 
   }
 

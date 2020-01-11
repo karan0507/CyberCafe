@@ -24,6 +24,7 @@ import { ActiveRecordModule } from './active-record/active-record.module';
 import { SidenavModule } from './sidenav/sidenav.module';
 import { RecordListComponent } from './record-list/record-list.component';
 import { RecordListModule } from './record-list/record-list.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -31,7 +32,6 @@ import { RecordListModule } from './record-list/record-list.module';
   declarations: [
     AppComponent,
     FooterComponent
-  
   ],
   entryComponents: [
     LoginComponent
@@ -44,6 +44,7 @@ import { RecordListModule } from './record-list/record-list.module';
     LoginModule,
     HomeModule,
     HeaderModule,
+    FormsModule,
     SidenavModule,
     BrowserModule,
     AppRoutingModule,

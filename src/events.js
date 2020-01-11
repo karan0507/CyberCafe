@@ -1,16 +1,18 @@
 const express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+io.on('connection', () => {
+    console.log('a user is connected')
+})
 
 function createRouter(db) {
     const router = express.Router();
     const owner = '';
     console.log("I am getting called");
-    io.on('connection', () => {
-            console.log('a user is connected')
-        })
-        // the routes are defined here
+
+    // the routes are defined here
 
     // the routes are defined here
 
