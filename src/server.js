@@ -3,9 +3,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const events = require('./events');
-const http = require('http').Server(app);
-var server = http.createServer(app);
-const app = express();
+
+
+
 
 const connection = mysql.createConnection({
     host: 'localhost',

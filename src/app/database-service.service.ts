@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class DatabaseServiceService {
-    pal = {name: '1', description: 'shasd', date: 'sa'};
+    // pal = {name: '1', description: 'shasd', date: 'sa'};
     resturl = 'http://localhost:8080/';
     constructor(private http: HttpClient) {
 
@@ -18,9 +18,9 @@ export class DatabaseServiceService {
      return this.http.get(this.resturl + 'login');
     }
 
-    createPost() {
-        console.log(this.pal);
-        this.http.post('http://localhost:8080/' + 'customer' , this.pal).subscribe(res => console.log(res));
+    addUser(user) {
+        // console.log(this.pal);
+        this.http.post('http://localhost:8080/' + 'customer' , user).subscribe(res => console.log(res));
     }
 
     listAllCustomers(): Observable<any> {

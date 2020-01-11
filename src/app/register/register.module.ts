@@ -4,6 +4,7 @@ import { RegisterComponent } from './register.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderModule } from '../header/header.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -19,6 +20,8 @@ const routes: Routes = [
   imports: [
     HeaderModule,
     SidenavModule,
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     RouterModule.forChild(routes)
   ],

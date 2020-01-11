@@ -9,22 +9,22 @@ import { DatabaseServiceService } from '../database-service.service';
   styleUrls: ['./active-record.component.scss']
 })
 export class ActiveRecordComponent implements OnInit {
-  
- name: Array<any> = ['hello','yash','where','is','your','office','sejal','also','works','there','kya?'];
-
-  constructor(private db: DatabaseServiceService) { 
-
-    
-  }
-
-  ngOnInit() {
-  }
+  formControlValue = '';
+  name: Array<any> = ['hello', 'yash', 'where', 'is', 'your', 'office', 'sejal', 'also', 'works', 'there', 'kya?'];
   profileForm = new FormGroup({
     name: new FormControl(''),
     number: new FormControl(''),
   });
+  constructor(private db: DatabaseServiceService) {
 
-  formControlValue = '';
+
+  }
+
+  ngOnInit() {
+  }
+
+
+
 
   findChoices(searchText: string) {
     return ['John', 'Jane', 'Jonny'].filter(item =>
