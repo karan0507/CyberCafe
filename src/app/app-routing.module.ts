@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterModule } from './register/register.module';
 import { ActiveRecordModule } from './active-record/active-record.module';
 import { RecordListModule } from './record-list/record-list.module';
+import { ActiveRecordListModule } from './active-record-list/active-record-list.module';
 
 
 const routes: Routes = [
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'records',
     component: RecordListModule
+  },
+  {
+    path: 'activerecords',
+    component: ActiveRecordListModule
   }
 ];
 

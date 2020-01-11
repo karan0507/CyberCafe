@@ -25,18 +25,22 @@ import { SidenavModule } from './sidenav/sidenav.module';
 import { RecordListComponent } from './record-list/record-list.component';
 import { RecordListModule } from './record-list/record-list.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActiveRecordListComponent } from './active-record-list/active-record-list.component';
+import { ActiveRecordListModule } from './active-record-list/active-record-list.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
+
   ],
   entryComponents: [
     LoginComponent
   ],
   imports: [
+    ActiveRecordListModule,
     RecordListModule,
     ActiveRecordModule,
     RegisterModule,
