@@ -1,27 +1,29 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HeaderModule } from '../header/header.module';
-import { SidenavModule } from '../sidenav/sidenav.module';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { DatabaseServiceService } from '../database-service.service';
 
-
-
-
 @Component({
-  selector: 'app-record-list',
-  templateUrl: './record-list.component.html',
-  styleUrls: ['./record-list.component.scss']
+  selector: 'app-active-record-list',
+  templateUrl: './active-record-list.component.html',
+  styleUrls: ['./active-record-list.component.scss']
 })
-export class RecordListComponent implements OnInit {
+export class ActiveRecordListComponent implements OnInit {
+
+  todayDate : Date = new Date();
+
   searchText;
   Sr_no = 'Sr.no';
   index = 1;
   Name = 'Name';
   addr = 'Address';
-  phone = 'Phone_No';
+  phone = 'Phone No';
   email = 'Email Address';
   balance = 'Balance';
+  starttime = 'Start Time';
+  prevbal = 'Previous Balance';
+  currbal = 'Current Balance';
+  pay = 'Pay Now';
+  rate;
+
 
 
   customers: Array<any>;
@@ -45,6 +47,5 @@ export class RecordListComponent implements OnInit {
   });
 
   }
-
 
 }
