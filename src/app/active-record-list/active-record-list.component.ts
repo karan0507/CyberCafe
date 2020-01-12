@@ -8,7 +8,7 @@ import { DatabaseServiceService } from '../database-service.service';
 })
 export class ActiveRecordListComponent implements OnInit {
 
-  todayDate : Date = new Date();
+  todayDate: Date = new Date();
 
   searchText;
   srNo = 'Sr.no';
@@ -21,6 +21,8 @@ export class ActiveRecordListComponent implements OnInit {
   starttime = 'Start Time';
   prevbal = 'Previous Balance';
   currbal = 'Current Balance';
+  payable = 'Payable Balance';
+  selecteduser: Array<any>;
   pay = 'Pay Now';
   rate;
 
@@ -38,6 +40,10 @@ export class ActiveRecordListComponent implements OnInit {
 
   }
 
+  onSelect(selectedItem: any) {
+    this.selecteduser = selectedItem;
+    console.log("Selected item Id: ", selectedItem ); // You get the Id of the selected item here
+}
 
   getCustomers() {
     this.db.listAllCustomers().subscribe(data => {
