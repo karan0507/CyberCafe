@@ -37,6 +37,21 @@
                                         <label for="exampleInputEmail1">Name</label>
                                         <input type="text" formControlName="name" id="name" class="form-control" placeholder="Enter email">
                                     </div>
+                                    <div *ngIf="registerForm.get('name').invalid && (registerForm.get('name').dirty || registerForm.get('name').touched)" class="alert alert-danger">
+
+                                        <div *ngIf="registerForm.get('name').errors.required">
+                                            Name is required.
+                                        </div>
+                                        <div *ngIf="registerForm.get('name').errors.minlength">
+                                            Name must be at least 4 characters long.
+                                        </div>
+                                        <div *ngIf="registerForm.get('name').errors.maxlength">
+                                            Name must be at most 100 characters long.
+                                        </div>
+                                        <div *ngIf="registerForm.get('name').errors.forbiddenName">
+                                            Name cannot be Bob.
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -129,7 +144,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Submit</button>
                         </div>
                     </form>
 

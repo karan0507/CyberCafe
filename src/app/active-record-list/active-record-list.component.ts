@@ -11,7 +11,7 @@ export class ActiveRecordListComponent implements OnInit {
   todayDate : Date = new Date();
 
   searchText;
-  Sr_no = 'Sr.no';
+  srNo = 'Sr.no';
   index = 1;
   Name = 'Name';
   addr = 'Address';
