@@ -10,7 +10,7 @@ import { ActiveRecordListComponent } from './active-record-list.component';
 
 const routes: Routes = [
   {
-    path: 'activerecords',
+    path: 'dashboard',
     component: ActiveRecordListComponent
   }
 ];

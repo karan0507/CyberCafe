@@ -39,7 +39,7 @@ const routes: Routes = [
     component: RecordListModule
   },
   {
-    path: 'activerecords',
+    path: 'dashboard',
     component: ActiveRecordListModule
   }
 ];

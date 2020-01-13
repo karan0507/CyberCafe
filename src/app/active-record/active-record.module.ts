@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActiveRecordComponent } from './active-record.component';
 import { Routes, RouterModule } from '@angular/router';
-import { SidenavComponent } from '../sidenav/sidenav.component';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { HeaderModule } from '../header/header.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +10,7 @@ import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
 
 const routes: Routes = [
   {
-    path:'entries',
+    path: 'entries',
     component: ActiveRecordComponent
   }
 ];
@@ -26,6 +25,6 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes)
   ],
-  exports:[ActiveRecordComponent]
+  exports: [ActiveRecordComponent]
 })
 export class ActiveRecordModule { }
