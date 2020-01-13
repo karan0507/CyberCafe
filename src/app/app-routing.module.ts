@@ -35,7 +35,7 @@ const routes: Routes = [
     component: ActiveRecordModule
   },
   {
-    path: 'records',
+    path: 'customer',
     component: RecordListModule
   },
   {
