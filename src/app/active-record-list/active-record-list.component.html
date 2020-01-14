@@ -56,9 +56,9 @@
                                 <td>{{customer.name | uppercase}}</td>
                                 <td>{{customer.phone_no}}</td>
                                 <td>{{todayDate | date :'short'}}</td>
-                                <td>{{customer.email_address}}</td>
-                                <td></td>
-                                <td></td>
+                                <td>{{customer?.bal}}</td>
+                                <td>{{customer?.credit_bal}}</td>
+                                <td>{{ customer.credit_bal - customer.bal }}</td>
                                 <td><button type="button" class="btn btn-block bg-gradient-primary btn-sm" data-toggle="modal" data-target="#modal-default" (click)="onSelect(customer)">Pay Now</button></td>
                             </tr>
 

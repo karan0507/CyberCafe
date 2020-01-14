@@ -40,7 +40,7 @@ export class ActiveRecordListComponent implements OnInit {
   constructor(private db: DatabaseServiceService) { }
 
  ngOnInit() {
-   this.getCustomers();
+  // this.getCustomers();
    this.getTransCust();
   }
 
