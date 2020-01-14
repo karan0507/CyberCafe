@@ -23,6 +23,13 @@ export class DatabaseServiceService {
         this.http.post('http://localhost:8080/' + 'customer' , user).subscribe(res => console.log(res));
     }
 
+    addTransaction(transaction) {
+        this.http.post(this.resturl + 'transaction', transaction).subscribe(res =>  console.log('database service transaction called'));
+    }
+
+    getCustTran(): Observable<any> {
+       return this.http.get(this.resturl + 'cust_trans');
+    }
     listAllCustomers(): Observable<any> {
         return this.http.get(this.resturl + 'customer');
 

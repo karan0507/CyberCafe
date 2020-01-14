@@ -26,14 +26,22 @@ export class ActiveRecordListComponent implements OnInit {
   pay = 'Pay Now';
   rate;
 
+  transaction = {
+    type: 'type',
+    debit_bal: 1000,
+    credit_bal: 0,
+    bal: 0 - 1000,
+    cid: 5
+  };
 
-
+  // custTran: Array<any>;
   customers: Array<any>;
 
   constructor(private db: DatabaseServiceService) { }
 
  ngOnInit() {
    this.getCustomers();
+   this.getTransCust();
   }
 
   onKey(event: any) { // without type info
@@ -54,4 +62,15 @@ export class ActiveRecordListComponent implements OnInit {
 
   }
 
+  addTransaction() {
+    console.log('component transaction called');
+    this.db.addTransaction(this.transaction);
+  }
+
+  getTransCust() {
+    this.db.getCustTran().subscribe(res => {
+      console.log(res);
+      this.customers = res;
+    });
+  }
 }

@@ -126,6 +126,41 @@ function createRouter(db) {
         );
     });
 
+
+
+    // Transactions
+    router.post('/transaction', (req, res, next) => {
+        console.log('database transaction called');
+        db.query(
+            'INSERT INTO transaction (type, debit_bal,credit_bal,bal,cid) VALUES (?,?,?,?,?)', [req.body.type, req.body.debit_bal, req.body.credit_bal, req.body.bal, req.body.cid],
+            (error) => {
+                if (error) {
+                    console.error(error);
+                    res.status(500).json({ status: 'adsadasdas' });
+                } else {
+                    res.status(200).json({ status: 'ok' });
+                }
+            }
+        );
+    });
+
+
+
+    router.get('/cust_trans', function(req, res, next) {
+        db.query(
+            'SELECT * from transaction INNER JOIN customer on transaction.cid = customer.id ', /* [req.params.id], */
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
+    // Transactions End
     router.get('/event', function(req, res, next) {
         db.query(
             'SELECT id, name, description, date FROM events WHERE owner=? ORDER BY date LIMIT 10 OFFSET ?', [owner, 10 * (req.params.page || 0)],
