@@ -36,6 +36,7 @@ export class ActiveRecordListComponent implements OnInit {
 
   // custTran: Array<any>;
   customers: Array<any>;
+  transactions: Array<any>;
 
   constructor(private db: DatabaseServiceService) { }
 
