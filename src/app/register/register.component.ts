@@ -32,7 +32,9 @@ export class RegisterComponent implements OnInit {
   saveUser() {
     console.log(this.registerForm.value);
     console.log('hello i am save user');
-    this.db.addUser(this.registerForm.value);
+    this.db.addUser(this.registerForm.value).subscribe(res => {
+      console.log(res);
+    });
   }
 
 

@@ -18,13 +18,18 @@ export class DatabaseServiceService {
      return this.http.get(this.resturl + 'login');
     }
 
-    addUser(user) {
+    addUser(user): Observable<any> {
         // console.log(this.pal);
-        this.http.post('http://localhost:8080/' + 'customer' , user).subscribe(res => console.log(res));
+       return this.http.post('http://localhost:8080/' + 'customer' , user);
+
     }
 
     addTransaction(transaction) {
-        this.http.post(this.resturl + 'transaction', transaction).subscribe(res =>  console.log('database service transaction called'));
+        this.http.post(this.resturl + 'transaction', transaction).
+        subscribe(res =>  {
+            console.log('database service transaction called' );
+            console.log(res);
+        });
     }
 
     getCustTran(): Observable<any> {
@@ -33,6 +38,17 @@ export class DatabaseServiceService {
     listAllCustomers(): Observable<any> {
         return this.http.get(this.resturl + 'customer');
 
+    }
+
+
+    addActiveUsers(user): Observable<any> {
+        return this.http.post(this.resturl + 'addActiveUsers' , user);
+    }
+
+
+
+    getAllActiveUsers(): Observable<any> {
+      return this.http.get(this.resturl + 'activeUsers');
     }
 
 }

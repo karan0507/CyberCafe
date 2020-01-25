@@ -20,7 +20,7 @@ export class ActiveRecordListComponent implements OnInit {
   balance = 'Balance';
   starttime = 'Start Time';
   prevbal = 'Previous Balance';
-  currbal = 'Current Balance';
+  currbal = 'Current Amount';
   payable = 'Payable Balance';
   selecteduser: Array<any>;
   pay = 'Pay Now';
@@ -36,12 +36,14 @@ export class ActiveRecordListComponent implements OnInit {
 
   // custTran: Array<any>;
   customers: Array<any>;
-
+  currentamt = 100;
+  paidamt: any;
   constructor(private db: DatabaseServiceService) { }
 
  ngOnInit() {
   // this.getCustomers();
-   this.getTransCust();
+  // this.getTransCust();
+  this.getActiveUsers();
   }
 
   onKey(event: any) { // without type info
@@ -50,11 +52,11 @@ export class ActiveRecordListComponent implements OnInit {
 
   onSelect(selectedItem: any) {
     this.selecteduser = selectedItem;
-    console.log("Selected item Id: ", selectedItem ); // You get the Id of the selected item here
+    console.log('Selected item Id: ', selectedItem ); // You get the Id of the selected item here
 }
 
   getCustomers() {
-    this.db.listAllCustomers().subscribe(data => {
+    this.db.getAllActiveUsers().subscribe(data => {
     console.log(data);
     this.customers = data;
 
@@ -70,6 +72,13 @@ export class ActiveRecordListComponent implements OnInit {
   getTransCust() {
     this.db.getCustTran().subscribe(res => {
       console.log(res);
+      this.customers = res;
+    });
+  }
+
+
+  getActiveUsers() {
+    this.db.getAllActiveUsers().subscribe(res => {
       this.customers = res;
     });
   }
