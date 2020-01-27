@@ -102,6 +102,21 @@ function createRouter(db) {
 
 
 
+    // Get Users With last transaction
+    router.get('/last_trans', function(req, res, next) {
+        db.query(
+            'SELECT id as cust_id,name,address,phone_no,email_address,max(tid) as maxtid from customer INNER JOIN transaction on customer.id = transaction.cid group by customer.id; ', /* [req.params.id], */
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
 
     //
 
@@ -251,13 +266,29 @@ function createRouter(db) {
 
     router.post('/addActiveUsers', function(req, res, next) {
         db.query(
-            'Insert into active_users (cust_id, tran_id, status) VALUES (?,(SELECT MAX(tid) from transaction where cid=? ),?)', [req.body.cust_id, req.body.cust_id, req.body.status], /* [req.params.id], */
+            'Insert into active_users (cust_id, tran_id, status) VALUES (?,?,"active")', [req.body.cust_id, req.body.maxtid], /* [req.params.id], */
             (error, results) => {
                 if (error) {
                     console.log(error);
                     res.status(500).json({ status: 'error' });
                 } else {
                     res.status(200).json(results);
+                }
+            }
+        );
+    });
+
+
+    router.delete('/deleteActiveUsers/:id', function(req, res, next) {
+        console.log('transaction deleting');
+        db.query(
+            'DELETE FROM active_users WHERE active_id=? ', [req.params.id],
+            (error) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json({ status: 'ok' });
                 }
             }
         );

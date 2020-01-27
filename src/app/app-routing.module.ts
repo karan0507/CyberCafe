@@ -12,6 +12,8 @@ import { RecordListModule } from './record-list/record-list.module';
 import { ActiveRecordListModule } from './active-record-list/active-record-list.module';
 import { DailyComponent } from './report/daily/daily.component';
 import { DailyModule } from './report/daily/daily.module';
+import { MonthlyModule } from './report/monthly/monthly.module';
+import { YearlyModule } from './report/yearly/yearly.module';
 
 
 const routes: Routes = [
@@ -47,6 +49,14 @@ const routes: Routes = [
   {
     path: 'daily',
     component: DailyModule
+  },
+  {
+    path: 'monthly',
+    component: MonthlyModule
+  },
+  {
+    path: 'yearly',
+    component: YearlyModule
   }
 ];
 

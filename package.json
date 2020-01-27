@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@types/mysql": "^2.15.8",
+    "angular-ng-autocomplete": "^1.1.16",
     "angular-text-input-autocomplete": "^0.3.0",
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",

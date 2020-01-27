@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseServiceService } from '../database-service.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-active-record-list',
@@ -9,7 +10,7 @@ import { DatabaseServiceService } from '../database-service.service';
 export class ActiveRecordListComponent implements OnInit {
 
   todayDate: Date = new Date();
-
+  aid;  // Active Id
   searchText;
   srNo = 'Sr.no';
   index = 1;
@@ -24,26 +25,30 @@ export class ActiveRecordListComponent implements OnInit {
   payable = 'Payable Balance';
   selecteduser: Array<any>;
   pay = 'Pay Now';
-  rate;
+  rate = 20;
+  hrs;
+  delUser: Array<any>;
 
-  transaction = {
-    type: 'type',
-    debit_bal: 1000,
-    credit_bal: 0,
-    bal: 0 - 1000,
-    cid: 5
-  };
+  // transaction = {
+  //   type: 'type',
+  //   debit_bal: 1000,
+  //   credit_bal: 0,
+  //   bal: 0 - 1000,
+  //   cid: 5
+  // };
 
   // custTran: Array<any>;
   customers: Array<any>;
-  currentamt = 100;
+  currentamt = this.rate * 1;
   paidamt: any;
+
+
   constructor(private db: DatabaseServiceService) { }
 
- ngOnInit() {
-  // this.getCustomers();
-  // this.getTransCust();
-  this.getActiveUsers();
+  ngOnInit() {
+    // this.getCustomers();
+    // this.getTransCust();
+    this.getActiveUsers();
   }
 
   onKey(event: any) { // without type info
@@ -52,22 +57,33 @@ export class ActiveRecordListComponent implements OnInit {
 
   onSelect(selectedItem: any) {
     this.selecteduser = selectedItem;
+    this.aid = selectedItem.active_id;
     console.log('Selected item Id: ', selectedItem ); // You get the Id of the selected item here
-}
+  }
 
   getCustomers() {
     this.db.getAllActiveUsers().subscribe(data => {
-    console.log(data);
-    this.customers = data;
+      console.log(data);
+      this.customers = data;
 
-  });
+    });
 
   }
 
   addTransaction() {
+    console.log(this.selecteduser + this.currbal + this.paidamt);
     console.log('component transaction called');
-    this.db.addTransaction(this.transaction);
+    this.db.addTransaction(this.selecteduser);
+
+    // const httpParams = new HttpParams().set('id', );
+    // const options = { params: httpParams };
+
+    this.db.deleteActicveUser(this.aid).subscribe(res => {
+      console.log(res);
+      this.getCustomers();
+    });
   }
+
 
   getTransCust() {
     this.db.getCustTran().subscribe(res => {

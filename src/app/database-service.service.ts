@@ -29,7 +29,12 @@ export class DatabaseServiceService {
         subscribe(res =>  {
             console.log('database service transaction called' );
             console.log(res);
+            // this.deleteActicveUser();
         });
+    }
+
+    deleteActicveUser(param): Observable<any> {
+     return this.http.delete(this.resturl + 'deleteActiveUsers/' + param);
     }
 
     getCustTran(): Observable<any> {
@@ -40,8 +45,12 @@ export class DatabaseServiceService {
 
     }
 
+    getCustomerWithLastTransaction(): Observable<any> {
+        return this.http.get(this.resturl + 'last_trans');
+    }
 
     addActiveUsers(user): Observable<any> {
+        console.log('active user in service');
         return this.http.post(this.resturl + 'addActiveUsers' , user);
     }
 

@@ -8,15 +8,15 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                 <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">  -->
+                <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">  -->
             </div>
             <div class="info">
-               <H2> <a class="d-block"> RECORD ME</a> </H2>
-               
+                <H2> <a class="d-block"> RECORD ME</a> </H2>
+
             </div>
-        </div> 
+        </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -67,7 +67,7 @@
 
                 <li class="nav-header">REPORTS</li>
                 <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
+                    <a [routerLink]="['daily']" routerLinkActive="active" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Daily Report
@@ -76,7 +76,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/gallery.html" class="nav-link">
+                    <a [routerLink]="['monthly']" routerLinkActive="active" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Monthly
@@ -84,7 +84,7 @@
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                    <a [routerLink]="['yearly']" routerLinkActive="active" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Yearly
@@ -101,13 +101,13 @@
                     </a>
                 </li>
 
-               
- 
-  <li>
+
+
+                <li>
                     <button type="button" class="btn btn-block btn-danger">
                         <i class="fas fa-sign-out-alt"></i>
                        Logout </button>
-                    </li> 
+                </li>
 
 
             </ul>

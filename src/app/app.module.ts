@@ -17,6 +17,9 @@ import { RecordListModule } from './record-list/record-list.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActiveRecordListModule } from './active-record-list/active-record-list.module';
 import { DailyModule } from './report/daily/daily.module';
+import { MonthlyComponent } from './report/monthly/monthly.component';
+import { MonthlyModule } from './report/monthly/monthly.module';
+import { YearlyModule } from './report/yearly/yearly.module';
 
 
 
@@ -31,6 +34,8 @@ import { DailyModule } from './report/daily/daily.module';
   ],
   imports: [
     ActiveRecordListModule,
+    MonthlyModule,
+    YearlyModule,
     RecordListModule,
     ActiveRecordModule,
     DailyModule,
