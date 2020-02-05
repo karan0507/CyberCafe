@@ -7,15 +7,17 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 
 import { ActiveRecordListComponent } from './active-record-list.component';
+import { ActiveResolve } from '../active-resolve';
 
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: ActiveRecordListComponent
+    component: ActiveRecordListComponent,
+    resolve: {user: ActiveResolve}
   }
 ];
 
-
+ 4
 @NgModule({
   declarations: [ActiveRecordListComponent],
   imports: [
@@ -23,6 +25,7 @@ const routes: Routes = [
     FormsModule,
     CommonModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  providers: [ActiveResolve]
 })
 export class ActiveRecordListModule { }

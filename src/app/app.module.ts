@@ -23,10 +23,12 @@ import { YearlyModule } from './report/yearly/yearly.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
+
 
   ],
   entryComponents: [

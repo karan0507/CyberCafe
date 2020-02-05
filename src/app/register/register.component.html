@@ -58,6 +58,21 @@
                                         <label for="exampleInputEmail1">Phone Number</label>
                                         <input type="tel" formControlName="phone_no" class="form-control" id="phone_no" placeholder="Enter Phone Number">
                                     </div>
+                                    <div *ngIf="registerForm.get('phone_no').invalid && (registerForm.get('phone_no').dirty || registerForm.get('phone_no').touched)" class="alert alert-danger">
+
+                                        <div *ngIf="registerForm.get('phone_no').errors.required">
+                                            Phone no is required.
+                                        </div>
+                                        <div *ngIf="registerForm.get('phone_no').errors.minlength">
+                                            Phone must be at least 10 characters long.
+                                        </div>
+                                        <div *ngIf="registerForm.get('phone_no').errors.maxlength">
+                                            Phone number must be at most 10 characters long.
+                                        </div>
+                                        <!-- <div *ngIf="registerForm.get('phone_no').errors">
+                                            Name cannot be Bob.
+                                        </div> -->
+                                    </div>
 
                                 </div>
                             </div>
@@ -71,9 +86,23 @@
                                                 <label class="custom-file-label" for="exampleInputFile">Choose
                                                     file</label>
                                             </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
+
+
+                                        </div>
+                                        <div *ngIf="registerForm.get('photo').invalid && (registerForm.get('photo').dirty || registerForm.get('photo').touched)" class="alert alert-danger">
+
+                                            <div *ngIf="registerForm.get('photo').errors.required">
+                                                Image is required.
                                             </div>
+                                            <div *ngIf="registerForm.get('photo').errors.minlength">
+                                                Phone must be at least 10 characters long.
+                                            </div>
+                                            <div *ngIf="registerForm.get('photo').errors.maxlength">
+                                                Phone number must be at most 10 characters long.
+                                            </div>
+                                            <!-- <div *ngIf="registerForm.get('phone_no').errors">
+                                                Name cannot be Bob.
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -86,9 +115,22 @@
                                                 <label class="custom-file-label" for="exampleInputFile">Choose
                                                     file</label>
                                             </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
+
+                                        </div>
+                                        <div *ngIf="registerForm.get('id_photo').invalid && (registerForm.get('id_photo').dirty || registerForm.get('id_photo').touched)" class="alert alert-danger">
+
+                                            <div *ngIf="registerForm.get('id_photo').errors.required">
+                                                Image is required.
                                             </div>
+                                            <div *ngIf="registerForm.get('id_photo').errors.minlength">
+                                                Phone must be at least 10 characters long.
+                                            </div>
+                                            <div *ngIf="registerForm.get('id_photo').errors.maxlength">
+                                                Phone number must be at most 10 characters long.
+                                            </div>
+                                            <!-- <div *ngIf="registerForm.get('phone_no').errors">
+                                                Name cannot be Bob.
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -96,6 +138,24 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email address</label>
                                         <input type="email" formControlName="email_address" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                    </div>
+                                    <div *ngIf="registerForm.get('email_address').invalid && (registerForm.get('email_address').dirty || registerForm.get('email_address').touched)" class="alert alert-danger">
+
+                                        <div *ngIf="registerForm.get('email_address').errors.required">
+                                            Email is required.
+                                        </div>
+                                        <div *ngIf="registerForm.get('email_address').errors.minlength">
+                                            Email must be at least 6 characters long.
+                                        </div>
+                                        <div *ngIf="registerForm.get('email_address').errors.maxlength">
+                                            Email must be at most 10 characters long.
+                                        </div>
+                                        <div *ngIf="registerForm.get('email_address').errors.email">
+                                            Enter a valid email address
+                                        </div>
+                                        <!-- <div *ngIf="registerForm.get('phone_no').errors">
+                                            Name cannot be Bob.
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

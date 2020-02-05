@@ -21,33 +21,11 @@ profileForm = new FormGroup({
 });
 
 keyword = 'name';
-// keywordno = 'phone_no';
-  states = [
-    {
-      name: 'Arkansas',
-      population: '82.978M',
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg'
-    },
-    {
-      name: 'California',
-      population: '39.14M',
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg'
-    },
-    {
-      name: 'Florida',
-      population: '20.27M',
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg'
-    },
-    {
-      name: 'Texas',
-      population: '27.47M',
-      flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
-    }
-  ];
 customers: Array<any>;
 number;
 email;
 address;
+date;
 selectedUser: Array<any>;
 constructor(private db: DatabaseServiceService) {
 
@@ -64,11 +42,12 @@ ngOnInit() {
 // }
 
 selectEvent(item) {
-  this.selectedUser = item;
+  this.selectedUser = item ;
   console.log('Selected item Id: ', item );
   this.number = item.phone_no;
   this.email = item.email_address;
   this.address = item.address;
+
    // You get the Id of the selected item here
 }
 
@@ -82,8 +61,9 @@ getAllUser() {
 }
 
   addActiveUser() {
+    this.date = new Date();
     console.log('Active User added');
-    this.db.addActiveUsers(this.selectedUser).subscribe(res => {
+    this.db.addActiveUsers(this.selectedUser ).subscribe(res => {
       console.log(res);
     });
 }

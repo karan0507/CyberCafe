@@ -14,6 +14,7 @@ import { DailyComponent } from './report/daily/daily.component';
 import { DailyModule } from './report/daily/daily.module';
 import { MonthlyModule } from './report/monthly/monthly.module';
 import { YearlyModule } from './report/yearly/yearly.module';
+import { ActiveResolve } from './active-resolve';
 
 
 const routes: Routes = [
@@ -62,6 +63,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ActiveResolve]
 })
 export class AppRoutingModule { }

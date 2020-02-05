@@ -170,7 +170,7 @@ function createRouter(db) {
 
     router.get('/customer/:id', function(req, res, next) {
         db.query(
-            'SELECT * FROM customer WHERE id=?', [req.params.id],
+            'SELECT * max(tid) FROM customer WHERE id=? ', [req.params.id],
             (error, results) => {
                 if (error) {
                     console.log(error);

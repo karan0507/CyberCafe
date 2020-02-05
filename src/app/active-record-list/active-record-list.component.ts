@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange, OnChanges, SimpleChanges, Input, Output } from '@angular/core';
 import { DatabaseServiceService } from '../database-service.service';
 import { HttpParams } from '@angular/common/http';
+import { interval, Observable, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-active-record-list',
   templateUrl: './active-record-list.component.html',
   styleUrls: ['./active-record-list.component.scss']
 })
-export class ActiveRecordListComponent implements OnInit {
+export class ActiveRecordListComponent implements OnInit, OnChanges {
 
   todayDate: Date = new Date();
   aid;  // Active Id
@@ -20,36 +22,80 @@ export class ActiveRecordListComponent implements OnInit {
   email = 'Email Address';
   balance = 'Balance';
   starttime = 'Start Time';
+  livetime = 'End Time';
   prevbal = 'Previous Balance';
   currbal = 'Current Amount';
   payable = 'Payable Balance';
   selecteduser: Array<any>;
   pay = 'Pay Now';
-  rate = 20;
+  rate;
   hrs;
   delUser: Array<any>;
-
-  // transaction = {
-  //   type: 'type',
-  //   debit_bal: 1000,
-  //   credit_bal: 0,
-  //   bal: 0 - 1000,
-  //   cid: 5
-  // };
-
-  // custTran: Array<any>;
   customers: Array<any>;
   currentamt = this.rate * 1;
-  paidamt: any;
+  payableamt = new Observable(sub => {
+    sub.next(this.currentamt);
+    console.log(sub);
+  });
+  cust;
+  // payableamt = this.currbal - this.prevbal;
+  paidamt;
+  // paidamt: any = new Observable(sub => {
+  //   sub.next(this.currentamt);
+  // });
+  mysqlDate: Date;
+  @Output()
+  now;
+  custDate = 'date';
 
 
-  constructor(private db: DatabaseServiceService) { }
+  constructor(private db: DatabaseServiceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     // this.getCustomers();
     // this.getTransCust();
     this.getActiveUsers();
+    this.call();
+    this.cust = this.route.snapshot.data.user;
+    console.log(this.cust);
+    this.getDateFromUser();
+    const timediff = Math.abs(this.now.getTime() - this.mysqlDate.getTime() ) / 36e5 ;
+    console.log(timediff);
+   // console.log(this.mysqlDate);
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    changes.now;
+  }
+
+  getDateFromUser() {
+    const cust2 = of(this.cust);
+    cust2.subscribe(res => {
+      res.map( res2 => {
+        console.log(res2.date);
+        this.mysqlDate = new Date(res2.date);
+        console.log(this.mysqlDate);
+      });
+    });
+  }
+
+  call() {
+    setInterval(this.timeUpdate, 1000);
+  }
+
+  updateBal() {
+    this.payableamt.subscribe({
+      next(x) { console.log('got value ' + x); },
+      error(err) { console.error('something wrong occurred: ' + err); },
+      complete() { console.log('done'); }
+    });
+    console.log('just after subscribe');
+  }
+
+  timeUpdate() {
+    return  this.now = new Date();
+  }
+
 
   onKey(event: any) { // without type info
 
@@ -58,6 +104,8 @@ export class ActiveRecordListComponent implements OnInit {
   onSelect(selectedItem: any) {
     this.selecteduser = selectedItem;
     this.aid = selectedItem.active_id;
+    const date = 'date2';
+    this.selecteduser[date] = new Date();
     console.log('Selected item Id: ', selectedItem ); // You get the Id of the selected item here
   }
 
@@ -71,7 +119,7 @@ export class ActiveRecordListComponent implements OnInit {
   }
 
   addTransaction() {
-    console.log(this.selecteduser + this.currbal + this.paidamt);
+    console.log(  this.selecteduser + this.currbal + this.paidamt);
     console.log('component transaction called');
     this.db.addTransaction(this.selecteduser);
 
@@ -95,6 +143,7 @@ export class ActiveRecordListComponent implements OnInit {
 
   getActiveUsers() {
     this.db.getAllActiveUsers().subscribe(res => {
+      console.log(res);
       this.customers = res;
     });
   }
