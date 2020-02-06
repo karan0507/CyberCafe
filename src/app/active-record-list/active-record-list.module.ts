@@ -4,7 +4,7 @@ import { HeaderModule } from '../header/header.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { RouterModule, Routes } from '@angular/router';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 
 import { ActiveRecordListComponent } from './active-record-list.component';
 import { ActiveResolve } from '../active-resolve';
@@ -24,6 +24,8 @@ const routes: Routes = [
     Ng2SearchPipeModule,
     FormsModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   providers: [ActiveResolve]

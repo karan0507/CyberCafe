@@ -98,6 +98,7 @@
     <!-- /.card-body -->
 </div>
 <!-- /.container-fluid -->
+<form [formGroup]="activeGroup" (submit)="saveUser()">
 <div class="modal fade" id="modal-default">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -137,7 +138,7 @@
                             </li>
                             <li class="list-group-item">
                                 <b>Paid Amount</b>
-                                <input class="float-right" type="text" č class="form-control" [(ngModel)]="paidamt">
+                                <input class="float-right" type="text" formControlName="amt" class="form-control" [(ngModel)]="paidamt" >
                             </li>
 
                             <li class="list-group-item">
@@ -146,7 +147,7 @@
                             </li>
                         </ul>
 
-                        <a class="btn btn-primary btn-block" (click)="addTransaction()"><b>Paid</b></a>
+                        <button class="btn btn-primary btn-block " data-dismiss="modal" (click)="addTransaction()" [disabled]="!activeGroup.valid" ><b>Paid</b></button>
                     </div>
                     <!-- /.card-body -->
                 </div>

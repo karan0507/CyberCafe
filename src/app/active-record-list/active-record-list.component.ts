@@ -3,6 +3,7 @@ import { DatabaseServiceService } from '../database-service.service';
 import { HttpParams } from '@angular/common/http';
 import { interval, Observable, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-active-record-list',
@@ -48,9 +49,14 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
   now;
   custDate = 'date';
 
+  activeGroup: FormGroup;
+  constructor(private db: DatabaseServiceService, private route: ActivatedRoute,private fb: FormBuilder,private formgroup: FormGroup) {
+    this.activeGroup = this.fb.group(
+      {amt: ['', [Validators.required]]});
 
-  constructor(private db: DatabaseServiceService, private route: ActivatedRoute) { }
-
+   }
+  
+  
   ngOnInit() {
     // this.getCustomers();
     // this.getTransCust();

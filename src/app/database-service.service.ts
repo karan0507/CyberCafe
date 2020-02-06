@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class DatabaseServiceService {
     // pal = {name: '1', description: 'shasd', date: 'sa'};
-    resturl = 'http://localhost:8080/';
+    resturl = 'http://localhost:8880/';
     constructor(private http: HttpClient) {
 
     }
@@ -20,7 +20,7 @@ export class DatabaseServiceService {
 
     addUser(user): Observable<any> {
         // console.log(this.pal);
-       return this.http.post('http://localhost:8080/' + 'customer' , user);
+       return this.http.post('http://localhost:8880/' + 'customer' , user);
 
     }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseServiceService } from '../database-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 // import { DatabaseServiceService } from '../database-service.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor(private db: DatabaseServiceService, private fb: FormBuilder, private http: HttpClient) {
+  constructor(private db: DatabaseServiceService, private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       phone_no: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10), Validators.maxLength(10)]],
@@ -35,7 +36,11 @@ export class RegisterComponent implements OnInit {
     this.db.addUser(this.registerForm.value).subscribe(res => {
       console.log(res);
     });
+    this.gotodashBoard();
   }
 
+  gotodashBoard(){
+    this.router.navigateByUrl('dashboard');
+  }
 
 }
