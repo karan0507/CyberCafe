@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 
 import { ActiveRecordListComponent } from './active-record-list.component';
 import { ActiveResolve } from '../active-resolve';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [ActiveRecordListComponent],
   imports: [
+    AutocompleteLibModule,
     Ng2SearchPipeModule,
     FormsModule,
     CommonModule,

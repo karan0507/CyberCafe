@@ -43,8 +43,8 @@
                                     {{Name | uppercase}}</th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 194px;">
                                     {{phone | uppercase}}</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 143px;">{{starttime | uppercase}}</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 143px;">{{livetime | uppercase}}</th>
+                                <!-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 143px;">{{starttime | uppercase}}</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 143px;">{{livetime | uppercase}}</th> -->
 
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
                                     {{prevbal | uppercase }}
@@ -62,12 +62,41 @@
                         </thead>
                         <tbody>
 
+                            <tr>
+                                <td>000</td>
+                                <td>
+                                    <div class="col-md-4  ng-autocomplete ">
+                                        <ng-autocomplete [data]="newcust" [searchKeyword]="keyword" (selected)="selectEvent($event)" placeHolder="Enter the  Name" historyIdentifier="states" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                        </ng-autocomplete>
+
+                                        <ng-template #itemTemplate let-item>
+                                            <div class="item">
+                                                <!-- <img src="{{item.flag}}" height="25"> -->
+                                                <span [innerHTML]="item.name"></span> &nbsp; &nbsp;<br>
+                                                <small>Phone Number: {{item.phone_no}} &nbsp; &nbsp;</small>
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template #notFoundTemplate let-notFound>
+                                            <div [innerHTML]="notFound"></div>
+                                        </ng-template>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+
+                                <td>add user</td>
+
+
+                            </tr>
                             <tr role="row" class="odd" *ngFor="let customer of customers | filter:searchText; index as i;">
                                 <td class="sorting_1">{{i}}</td>
                                 <td>{{customer.name | uppercase}}</td>
                                 <td>{{customer.phone_no}}</td>
-                                <td>{{customer.date | date :'short' }}</td>
-                                <td>{{ timeUpdate() | date :'short'}}</td>
+                                <!-- <td>{{customer.date | date :'short' }}</td>
+                                <td>{{ timeUpdate() | date :'short'}}</td> -->
                                 <td>{{customer?.bal | currency:'INR'}}</td>
 
                                 <td>{{rate | currency:'INR'}}</td>
@@ -99,67 +128,67 @@
 </div>
 <!-- /.container-fluid -->
 <form [formGroup]="activeGroup" (submit)="saveUser()">
-<div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Default Modal</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Default Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-            <div class="modal-body">
-                <div class="card card-primary card-outline">
+                </div>
+                <div class="modal-body">
+                    <div class="card card-primary card-outline">
 
-                    <div class="card-body box-profile">
-                        <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
-                        </div>
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                            </div>
 
-                        <h3 class="profile-username text-center">{{ selecteduser?.name }}</h3>
+                            <h3 class="profile-username text-center">{{ selecteduser?.name }}</h3>
 
-                        <p class="text-muted text-center">{{selecteduser?.phone_no}}</p>
-                        <p> {{ now | date :'short'}}</p>
-                        <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <!-- <td></td>
+                            <p class="text-muted text-center">{{selecteduser?.phone_no}}</p>
+                            <p> {{ now | date :'short'}}</p>
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <!-- <td></td>
                                 <td></td>
                                 <td></td> -->
-                                <b>Previous Balance</b>
-                                <a class="float-right">{{selecteduser?.bal | currency:'INR'}}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Current Amount</b>
-                                <a class="float-right">{{ currentamt | currency:'INR' }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Payable Amount</b>
-                                <a class="float-right">{{ currentamt + selecteduser?.bal | currency:'INR'}}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Paid Amount</b>
-                                <input class="float-right" type="text" formControlName="amt" class="form-control" [(ngModel)]="paidamt" >
-                            </li>
+                                    <b>Previous Balance</b>
+                                    <a class="float-right">{{selecteduser?.bal | currency:'INR'}}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Current Amount</b>
+                                    <a class="float-right">{{ currentamt | currency:'INR' }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Payable Amount</b>
+                                    <a class="float-right">{{ currentamt + selecteduser?.bal | currency:'INR'}}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Paid Amount</b>
+                                    <input class="float-right" type="text" formControlName="amt" class="form-control" [(ngModel)]="paidamt">
+                                </li>
 
-                            <li class="list-group-item">
-                                <b>Amount Remaining</b>
-                                <a class="float-right">{{ paidamt - currentamt + selecteduser?.bal | currency:'INR'}}</a>
-                            </li>
-                        </ul>
+                                <li class="list-group-item">
+                                    <b>Amount Remaining</b>
+                                    <a class="float-right">{{ paidamt - currentamt + selecteduser?.bal | currency:'INR'}}</a>
+                                </li>
+                            </ul>
 
-                        <button class="btn btn-primary btn-block " data-dismiss="modal" (click)="addTransaction()" [disabled]="!activeGroup.valid" ><b>Paid</b></button>
+                            <button class="btn btn-primary btn-block " data-dismiss="modal" (click)="addTransaction()" [disabled]="!activeGroup.valid"><b>Paid</b></button>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
                 </div>
-            </div>
-            <!-- <div class="modal-footer justify-content-between">
+                <!-- <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div> -->
+            </div>
+            <!-- /.modal-content -->
+            <!-- /.modal-dialog -->
+            <!-- /.modal -->
         </div>
-        <!-- /.modal-content -->
-        <!-- /.modal-dialog -->
-        <!-- /.modal -->
     </div>
-</div>
-<!-- </form> -->
+    <!-- </form> -->

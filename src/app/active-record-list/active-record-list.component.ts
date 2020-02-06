@@ -48,15 +48,17 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
   @Output()
   now;
   custDate = 'date';
-
+  selectedUser: Array<any>;
+  number; keyword = 'name';
+  newcust: Array<any>;
   activeGroup: FormGroup;
-  constructor(private db: DatabaseServiceService, private route: ActivatedRoute,private fb: FormBuilder,private formgroup: FormGroup) {
+  constructor(private db: DatabaseServiceService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.activeGroup = this.fb.group(
-      {amt: ['', [Validators.required]]});
+      { amt: ['', [Validators.required]] });
 
-   }
-  
-  
+    this.getAllUser();
+  }
+
   ngOnInit() {
     // this.getCustomers();
     // this.getTransCust();
@@ -65,19 +67,17 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
     this.cust = this.route.snapshot.data.user;
     console.log(this.cust);
     this.getDateFromUser();
-    const timediff = Math.abs(this.now.getTime() - this.mysqlDate.getTime() ) / 36e5 ;
-    console.log(timediff);
-   // console.log(this.mysqlDate);
+   // const timediff = Math.abs(this.now.getTime() - this.mysqlDate.getTime()) / 36e5;
+   // console.log(timediff);
+    // console.log(this.mysqlDate);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    changes.now;
-  }
+
 
   getDateFromUser() {
     const cust2 = of(this.cust);
     cust2.subscribe(res => {
-      res.map( res2 => {
+      res.map(res2 => {
         console.log(res2.date);
         this.mysqlDate = new Date(res2.date);
         console.log(this.mysqlDate);
@@ -99,7 +99,7 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
   }
 
   timeUpdate() {
-    return  this.now = new Date();
+    return this.now = new Date();
   }
 
 
@@ -112,7 +112,7 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
     this.aid = selectedItem.active_id;
     const date = 'date2';
     this.selecteduser[date] = new Date();
-    console.log('Selected item Id: ', selectedItem ); // You get the Id of the selected item here
+    console.log('Selected item Id: ', selectedItem); // You get the Id of the selected item here
   }
 
   getCustomers() {
@@ -125,7 +125,7 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
   }
 
   addTransaction() {
-    console.log(  this.selecteduser + this.currbal + this.paidamt);
+    console.log(this.selecteduser + this.currbal + this.paidamt);
     console.log('component transaction called');
     this.db.addTransaction(this.selecteduser);
 
@@ -151,6 +151,34 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
     this.db.getAllActiveUsers().subscribe(res => {
       console.log(res);
       this.customers = res;
+    });
+  }
+
+
+  selectEvent(item) {
+    this.selectedUser = item;
+    console.log('Selected item Id: ', item);
+    this.number = item.phone_no;
+    this.email = item.email_address;
+  //  this.address = item.address;
+  
+    // You get the Id of the selected item here
+  }
+
+
+
+  getAllUser() {
+    this.db.getCustomerWithLastTransaction().subscribe(data => {
+      console.log(data);
+      this.newcust = data;
+    });
+  }
+
+  addActiveUser() {
+    // this.date = new Date();
+    console.log('Active User added');
+    this.db.addActiveUsers(this.selectedUser).subscribe(res => {
+      console.log(res);
     });
   }
 }
