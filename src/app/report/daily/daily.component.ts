@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseServiceService } from 'src/app/database-service.service';
+import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-daily',
@@ -7,6 +9,17 @@ import { DatabaseServiceService } from 'src/app/database-service.service';
   styleUrls: ['./daily.component.scss']
 })
 export class DailyComponent implements OnInit {
+
+  exportAsConfig: ExportAsConfig = {
+    type: 'xls', // the type you want to download
+    elementId: 'dayreports', // the id of html/table element
+  };
+
+  exportAsConfigpdf: ExportAsConfig = {
+    type: 'pdf', // the type you want to download
+    elementId: 'dayreports', // the id of html/table element
+  };
+
   searchText;
   srno = 'Sr.no';
   index = 1;
@@ -15,11 +28,11 @@ export class DailyComponent implements OnInit {
   phone = 'Phone_No';
   email = 'Email Address';
   balance = 'Balance';
-
-
+  date: Date = new Date();
+  options = ['UPI', 'PAYTM', 'CASH' , 'BORROWED' , 'BANK TRANSFER'];
   customers: Array<any>;
-
-  constructor(private db: DatabaseServiceService) { }
+  public selectedValues$: Subject<string> = new Subject();
+  constructor(private db: DatabaseServiceService, private exportAsService: ExportAsService) { }
 
  ngOnInit() {
    this.getCustomers();
@@ -29,6 +42,9 @@ export class DailyComponent implements OnInit {
 
   }
 
+  onChange(selectedValue) {
+    this.selectedValues$.next(selectedValue);
+  }
 
   getCustomers() {
     this.db.listAllCustomers().subscribe(data => {
@@ -37,6 +53,26 @@ export class DailyComponent implements OnInit {
 
   });
 
+  }
+   export() {
+    // download the file using old school javascript method
+    this.exportAsService.save(this.exportAsConfig, 'My File Name').subscribe(() => {
+      // save started
+    });
+    // get the data as base64 or json object for json type - this will be helpful in ionic or SSR
+    // this.exportAsService.get(this.config).subscribe(content => {
+    //   console.log(content);
+    // });
+  }
+  exportpdf() {
+    // download the file using old school javascript method
+    this.exportAsService.save(this.exportAsConfigpdf, 'My File Name').subscribe(() => {
+      // save started
+    });
+    // get the data as base64 or json object for json type - this will be helpful in ionic or SSR
+    // this.exportAsService.get(this.config).subscribe(content => {
+    //   console.log(content);
+    // });
   }
 
 }

@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './active-record-list.component.html',
   styleUrls: ['./active-record-list.component.scss']
 })
-export class ActiveRecordListComponent implements OnInit, OnChanges {
+export class ActiveRecordListComponent implements OnInit {
 
   todayDate: Date = new Date();
   aid;  // Active Id
@@ -67,8 +67,8 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
     this.cust = this.route.snapshot.data.user;
     console.log(this.cust);
     this.getDateFromUser();
-   // const timediff = Math.abs(this.now.getTime() - this.mysqlDate.getTime()) / 36e5;
-   // console.log(timediff);
+    // const timediff = Math.abs(this.now.getTime() - this.mysqlDate.getTime()) / 36e5;
+    // console.log(timediff);
     // console.log(this.mysqlDate);
   }
 
@@ -107,6 +107,7 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
 
   }
 
+  // onSelect retreives the selected item from the table and stores it as an object to be used.
   onSelect(selectedItem: any) {
     this.selecteduser = selectedItem;
     this.aid = selectedItem.active_id;
@@ -160,8 +161,8 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
     console.log('Selected item Id: ', item);
     this.number = item.phone_no;
     this.email = item.email_address;
-  //  this.address = item.address;
-  
+    //  this.address = item.address;
+
     // You get the Id of the selected item here
   }
 
