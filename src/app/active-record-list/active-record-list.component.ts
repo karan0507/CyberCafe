@@ -11,6 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./active-record-list.component.scss']
 })
 export class ActiveRecordListComponent implements OnInit, OnChanges {
+  bal: any;
+  ngOnChanges(changes: SimpleChanges): void {
+    throw new Error("Method not implemented.");
+  }
 
   todayDate: Date = new Date();
   aid;  // Active Id
@@ -33,11 +37,8 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
   hrs;
   delUser: Array<any>;
   customers: Array<any>;
-  currentamt = this.rate * 1;
-  payableamt = new Observable(sub => {
-    sub.next(this.currentamt);
-    console.log(sub);
-  });
+  currentamt: Number;
+  payableamt: Number;
   cust;
   // payableamt = this.currbal - this.prevbal;
   paidamt;
@@ -49,7 +50,8 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
   now;
   custDate = 'date';
   selectedUser: Array<any>;
-  number; keyword = 'name';
+  number; 
+  keyword = 'name';
   newcust: Array<any>;
   activeGroup: FormGroup;
   constructor(private db: DatabaseServiceService, private route: ActivatedRoute, private fb: FormBuilder) {
@@ -159,9 +161,9 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
     this.selectedUser = item;
     console.log('Selected item Id: ', item);
     this.number = item.phone_no;
-    this.email = item.email_address;
+    this.bal = item.bal;
   //  this.address = item.address;
-  
+   this.getAllUser();
     // You get the Id of the selected item here
   }
 
@@ -178,6 +180,8 @@ export class ActiveRecordListComponent implements OnInit, OnChanges {
     // this.date = new Date();
     console.log('Active User added');
     this.db.addActiveUsers(this.selectedUser).subscribe(res => {
+      this.getAllUser();
+      this.getCustomers();
       console.log(res);
     });
   }

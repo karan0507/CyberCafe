@@ -46,6 +46,7 @@ export class DatabaseServiceService {
     }
 
     getCustomerWithLastTransaction(): Observable<any> {
+        console.log('hello');
         return this.http.get(this.resturl + 'last_trans');
     }
 

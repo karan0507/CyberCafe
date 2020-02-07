@@ -82,12 +82,17 @@
                                         </ng-template>
                                     </div>
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                     
+                                
+                                <td> {{number}} </td>
+                                <td>{{bal  | currency:'INR'}}</td>
+                                <td style="font-size: 47px;
+                                padding-left: 36px;">-</td>
+                                <td style="font-size: 47px;
+                                padding-left: 36px;">-</td>
+                                
 
-                                <td>add user</td>
+                                <td><button type="submit" class="btn btn-primary" (click)="addActiveUser()">Add User</button></td>
 
 
                             </tr>
@@ -159,11 +164,12 @@
                                 </li>
                                 <li class="list-group-item">
                                     <b>Current Amount</b>
-                                    <a class="float-right">{{ currentamt | currency:'INR' }}</a>
+                                    <!-- <a class="float-right">{{  | currency:'INR' }}</a> -->
+                                    <input class="float-right" type="text" formControlName="amt" class="form-control" [(ngModel)]="currentamt">
                                 </li>
                                 <li class="list-group-item">
                                     <b>Payable Amount</b>
-                                    <a class="float-right">{{ currentamt + selecteduser?.bal | currency:'INR'}}</a>
+                                    <a class="float-right">{{ currentamt - selecteduser?.bal}}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Paid Amount</b>
