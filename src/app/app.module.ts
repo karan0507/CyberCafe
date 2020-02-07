@@ -20,6 +20,7 @@ import { DailyModule } from './report/daily/daily.module';
 import { MonthlyComponent } from './report/monthly/monthly.component';
 import { MonthlyModule } from './report/monthly/monthly.module';
 import { YearlyModule } from './report/yearly/yearly.module';
+import { MyCustomFilterPipePipe } from './my-custom-filter-pipe.pipe';
 
 
 
@@ -27,8 +28,7 @@ import { YearlyModule } from './report/yearly/yearly.module';
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-
+    FooterComponent
 
   ],
   entryComponents: [
