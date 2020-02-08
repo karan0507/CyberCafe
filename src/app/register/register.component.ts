@@ -3,6 +3,7 @@ import { DatabaseServiceService } from '../database-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { WebCamComponent } from 'ack-angular-webcam';
 // import { DatabaseServiceService } from '../database-service.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  base64;
   registerForm: FormGroup;
 
   constructor(private db: DatabaseServiceService, private fb: FormBuilder, private http: HttpClient, private router: Router) {
@@ -43,4 +44,14 @@ export class RegisterComponent implements OnInit {
     this.router.navigateByUrl('dashboard');
   }
 
+  genBase64( webcam: WebCamComponent ) {
+    webcam.getBase64()
+    .then( base => this.base64  = base)
+    .catch( e => console.error(e));
+    console.log(this.base64);
+  }
+
+  onCamError(err) {}
+
+  onCamSuccess() {}
 }

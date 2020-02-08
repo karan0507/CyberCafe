@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HeaderModule } from '../header/header.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WebCamModule} from 'ack-angular-webcam';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   imports: [
     HeaderModule,
     SidenavModule,
+    WebCamModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

@@ -10,9 +10,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './active-record-list.component.html',
   styleUrls: ['./active-record-list.component.scss']
 })
-export class ActiveRecordListComponent implements OnInit{
+export class ActiveRecordListComponent implements OnInit {
   bal: any;
-  
+
 
   todayDate: Date = new Date();
   aid;  // Active Id
@@ -48,7 +48,7 @@ export class ActiveRecordListComponent implements OnInit{
   now;
   custDate = 'date';
   selectedUser: Array<any>;
-  number; 
+  number;
   keyword = 'name';
   newcust: Array<any>;
   activeGroup: FormGroup;
@@ -89,14 +89,14 @@ export class ActiveRecordListComponent implements OnInit{
     setInterval(this.timeUpdate, 1000);
   }
 
-  updateBal() {
-    this.payableamt.subscribe({
-      next(x) { console.log('got value ' + x); },
-      error(err) { console.error('something wrong occurred: ' + err); },
-      complete() { console.log('done'); }
-    });
-    console.log('just after subscribe');
-  }
+  // updateBal() {
+  //   this.payableamt.subscribe({
+  //     next(x) { console.log('got value ' + x); },
+  //     error(err) { console.error('something wrong occurred: ' + err); },
+  //     complete() { console.log('done'); }
+  //   });
+  //   console.log('just after subscribe');
+  // }
 
   timeUpdate() {
     return this.now = new Date();
@@ -161,8 +161,8 @@ export class ActiveRecordListComponent implements OnInit{
     console.log('Selected item Id: ', item);
     this.number = item.phone_no;
     this.bal = item.bal;
-  //  this.address = item.address;
-   this.getAllUser();
+    //  this.address = item.address;
+    this.getAllUser();
     // You get the Id of the selected item here
   }
 
@@ -176,12 +176,35 @@ export class ActiveRecordListComponent implements OnInit{
   }
 
   addActiveUser() {
-    // this.date = new Date();
-    console.log('Active User added');
-    this.db.addActiveUsers(this.selectedUser).subscribe(res => {
-      this.getAllUser();
-      this.getCustomers();
+    this.db.getAllActiveUsers().subscribe(res => {
       console.log(res);
+      res.map(obj => {
+        console.log(obj.id);
+        const objarray: Array<any> = obj.id;
+        if (this.selectedUser['cust_id'] === objarray) {
+          console.log('Already exists');
+        } else {
+          console.log('doesnt not exists');
+
+          console.log('Active User added');
+          this.db.addActiveUsers(this.selectedUser).subscribe(res2 => {
+            this.getAllUser();
+            this.getCustomers();
+            console.log(res2);
+          });
+        }
+      });
+      // console.log(this.selectedUser['cust_id']);
+
     });
+    // this.date = new Date();
+
+
+    // console.log('Active User added');
+    // this.db.addActiveUsers(this.selectedUser).subscribe(res => {
+    //   this.getAllUser();
+    //   this.getCustomers();
+    //   console.log(res);
+    // });
   }
 }
