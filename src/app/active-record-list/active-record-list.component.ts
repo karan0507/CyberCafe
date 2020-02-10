@@ -52,11 +52,17 @@ export class ActiveRecordListComponent implements OnInit {
   keyword = 'name';
   newcust: Array<any>;
   activeGroup: FormGroup;
+  addUser: FormGroup;
+
   options = ['UPI', 'PAYTM', 'CASH' , ' उधारी | BORROWED' , 'BANK TRANSFER', 'पैशे'];
 
   constructor(private db: DatabaseServiceService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.activeGroup = this.fb.group(
-      { amt: ['', [Validators.required]] });
+      { name: ['', [Validators.required]] });
+
+    this.addUser = this.fb.group(
+        { name: ['', [Validators.required]] });
+
 
     this.getAllUser();
   }
