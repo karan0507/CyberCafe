@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DatabaseServiceService } from '../database-service.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,7 +29,7 @@ email;
 address;
 date;
 selectedUser: Array<any>;
-constructor(private db: DatabaseServiceService) {
+constructor(private db: DatabaseServiceService, private router: Router) {
 
   this.getAllUser();
 }
@@ -65,7 +67,11 @@ getAllUser() {
     console.log('Active User added');
     this.db.addActiveUsers(this.selectedUser ).subscribe(res => {
       console.log(res);
+      this.gotoActiveRecordList();
+      
     });
 }
-
+gotoActiveRecordList(){
+  this.router.navigateByUrl('dashboard');
+}
 }

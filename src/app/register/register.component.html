@@ -1,10 +1,12 @@
 <!-- <app-header></app-header>
 <app-sidenav class="sidebar"></app-sidenav> -->
+<!-- Register Page -->
 <div class="element">
     <section class="content-header ">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
+                    <!--Registeration general form-->
                     <h1>General Form</h1>
                 </div>
                 <div class="col-sm-6">
@@ -29,12 +31,13 @@
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form [formGroup]="registerForm" (submit)="saveUser()">
-
+                        <!--Entering the user details with validators for form values-->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Name</label>
+                                        
                                         <input type="text" formControlName="name" id="name" class="form-control" placeholder="Enter email">
                                     </div>
                                     <div *ngIf="registerForm.get('name').invalid && (registerForm.get('name').dirty || registerForm.get('name').touched)" class="alert alert-danger">
@@ -69,13 +72,12 @@
                                         <div *ngIf="registerForm.get('phone_no').errors.maxlength">
                                             Phone number must be at most 10 characters long.
                                         </div>
-                                        <!-- <div *ngIf="registerForm.get('phone_no').errors">
-                                            Name cannot be Bob.
-                                        </div> -->
+                                        
                                     </div>
 
                                 </div>
                             </div>
+                            <!--Upload Photo and proof-->
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -159,7 +161,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <!--Gender Selection-->
                             <div class="row">
                                 <div class="form-group">
                                     &nbsp; <label for="">Gender</label> <br>
@@ -202,6 +204,7 @@
                             </div>
                         </div>
                         <!-- /.card-body -->
+                        <!--Submiting the register form -->
 
                         <div class="card-footer">
 
@@ -235,7 +238,7 @@
             <!-- /.row -->
         </div>
 
-
+        <!--Storing photo for proof-->
         <button type="button" (click)="genBase64(webcam)" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
             Launch Default Modal
           </button>
