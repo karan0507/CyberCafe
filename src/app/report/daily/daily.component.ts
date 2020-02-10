@@ -24,17 +24,18 @@ export class DailyComponent implements OnInit {
   searchText;
   srno = 'Sr.no';
   index = 1;
-  Name = 'Name';
+  name = 'Name';
   addr = 'Address';
-  phone = 'Phone_No';
+  phone = 'Phone No';
   email = 'Email Address';
-  balance = 'Balance';
-
+  // balance = 'Balance';
+  type = 'Type of Payment';
   total = 'Total';
-  currcash = 'आजची कॅश  | Credited Cash';
+  balance = 'आजची कॅश  | Credited Cash';
   remark = 'remark';
   date: Date = new Date();
-  options = ['UPI', 'PAYTM', 'CASH' , 'BORROWED' , 'BANK TRANSFER'];
+  // tomorrow =  new Date().getDate() + 1 ;
+  options = ['UPI', 'PAYTM', 'CASH' , ' उधारी | BORROWED' , 'BANK TRANSFER', 'उधारी जमा', 'पैशे'];
   customers: Array<any>;
   public selectedValues$: Subject<string> = new Subject();
   constructor(private db: DatabaseServiceService, private exportAsService: ExportAsService) { }

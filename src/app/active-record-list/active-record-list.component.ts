@@ -35,8 +35,8 @@ export class ActiveRecordListComponent implements OnInit {
   hrs;
   delUser: Array<any>;
   customers: Array<any>;
-  currentamt: Number;
-  payableamt: Number;
+  currentamt: number;
+  payableamt: number;
   cust;
   // payableamt = this.currbal - this.prevbal;
   paidamt;
@@ -52,6 +52,8 @@ export class ActiveRecordListComponent implements OnInit {
   keyword = 'name';
   newcust: Array<any>;
   activeGroup: FormGroup;
+  options = ['UPI', 'PAYTM', 'CASH' , ' उधारी | BORROWED' , 'BANK TRANSFER', 'पैशे'];
+
   constructor(private db: DatabaseServiceService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.activeGroup = this.fb.group(
       { amt: ['', [Validators.required]] });

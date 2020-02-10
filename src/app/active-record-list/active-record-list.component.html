@@ -82,15 +82,15 @@
                                         </ng-template>
                                     </div>
                                 </td>
-                                     
-                                
+
+
                                 <td> {{number}} </td>
-                                <td>{{bal  | currency:'INR'}}</td>
+                                <td>{{bal | currency:'INR'}}</td>
                                 <!-- <td style="font-size: 47px;
                                 padding-left: 36px;">-</td>
                                 <td style="font-size: 47px;
                                 padding-left: 36px;">-</td> -->
-                                
+
 
                                 <td><button type="submit" class="btn btn-primary" (click)="addActiveUser()">Add User</button></td>
 
@@ -104,8 +104,8 @@
                                 <td>{{ timeUpdate() | date :'short'}}</td> -->
                                 <td>{{customer?.bal | currency:'INR'}}</td>
 
-                                <td>{{rate | currency:'INR'}}</td>
-                                <td>{{ payableamt | async | currency:'INR'}}</td>
+                                <!-- <td>{{rate | currency:'INR'}}</td>
+                                <td>{{ payableamt | async | currency:'INR'}}</td> -->
                                 <td><button type="button" class="btn btn-block bg-gradient-primary btn-sm" data-toggle="modal" data-target="#modal-default" (click)="onSelect(customer)">Pay Now</button></td>
                             </tr>
 
@@ -165,7 +165,7 @@
                                 <li class="list-group-item">
                                     <b>Current Amount</b>
                                     <!-- <a class="float-right">{{  | currency:'INR' }}</a> -->
-                                    <input class="float-right" type="text" formControlName="amt" class="form-control" [(ngModel)]="currentamt">
+                                    <input class="float-right" type="text" formControlName="amt" style="float: right; width: 50%;" class="form-control" [(ngModel)]="currentamt">
                                 </li>
                                 <li class="list-group-item">
                                     <b>Payable Amount</b>
@@ -173,9 +173,26 @@
                                 </li>
                                 <li class="list-group-item">
                                     <b>Paid Amount</b>
-                                    <input class="float-right" type="text" formControlName="amt" class="form-control" [(ngModel)]="paidamt">
+                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="amt" class="form-control" [(ngModel)]="paidamt">
                                 </li>
-
+                                <li class="list-group-item">
+                                    <b>Payment Type</b>
+                                    <select class="form-control" style="float: right; width: 50%;" (change)="onChange($event.target.value)">
+                                        <option >Select by Type</option>
+                                        <option *ngFor="let option of options" [value]="option"  >
+                                            {{ option }}
+                                        </option>
+                                        <!-- <option value="">UPI</option>
+                                        <option value="">Cash</option>
+                                        <option value="">Lend</option>
+                                        <option value="">Deposits</option>
+                                        <option value="">Excess Deposits</option> -->
+                                    </select>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Remark</b>
+                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="amt" class="form-control" [(ngModel)]="remark">
+                                </li>
                                 <li class="list-group-item">
                                     <b>Amount Remaining</b>
                                     <a class="float-right">{{ paidamt - currentamt + selecteduser?.bal | currency:'INR'}}</a>

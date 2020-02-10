@@ -38,12 +38,11 @@ export class RecordListComponent implements OnInit {
 
 
   getCustomers() {
-    this.db.listAllCustomers().subscribe(data => {
-    console.log(data);
-    this.customers = data;
-
-  });
-
+    this.db.getCustomerWithLastTransaction().subscribe(
+      res => {
+        this.customers = res;
+        console.log(res);
+      });
   }
 
 
