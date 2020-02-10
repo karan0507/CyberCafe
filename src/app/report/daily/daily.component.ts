@@ -29,6 +29,10 @@ export class DailyComponent implements OnInit {
   phone = 'Phone_No';
   email = 'Email Address';
   balance = 'Balance';
+
+  total = 'Total';
+  currcash = 'आजची कॅश  | Credited Cash';
+  remark = 'remark';
   date: Date = new Date();
   options = ['UPI', 'PAYTM', 'CASH' , 'BORROWED' , 'BANK TRANSFER'];
   customers: Array<any>;
@@ -36,7 +40,8 @@ export class DailyComponent implements OnInit {
   constructor(private db: DatabaseServiceService, private exportAsService: ExportAsService) { }
 
  ngOnInit() {
-   this.getCustomers();
+  //  this.getCustomers();
+  this.getCustomerDetailsWithBalance();
   }
 
   onKey(event: any) { // without type info
@@ -47,14 +52,14 @@ export class DailyComponent implements OnInit {
     this.selectedValues$.next(selectedValue);
   }
 
-  getCustomers() {
-    this.db.listAllCustomers().subscribe(data => {
-    console.log(data);
-    this.customers = data;
+  // getCustomers() {
+  //   this.db.listAllCustomers().subscribe(data => {
+  //   console.log(data);
+  //   this.customers = data;
 
-  });
+  // });
 
-  }
+  // }
    export() {
     // download the file using old school javascript method
     this.exportAsService.save(this.exportAsConfig, 'My File Name').subscribe(() => {
@@ -76,4 +81,12 @@ export class DailyComponent implements OnInit {
     // });
   }
 
+
+    getCustomerDetailsWithBalance() {
+      this.db.getCustomerWithLastTransaction().subscribe(
+        res => {
+          this.customers = res;
+          console.log(res);
+        });
+    }
 }
