@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseServiceService } from 'src/app/database-service.service';
 import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
 import { Subject } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-daily',
@@ -19,7 +20,7 @@ export class DailyComponent implements OnInit {
     type: 'pdf', // the type you want to download
     elementId: 'dayreports', // the id of html/table element
   };
-
+  dropdown: FormControl;
   searchText;
   srno = 'Sr.no';
   index = 1;

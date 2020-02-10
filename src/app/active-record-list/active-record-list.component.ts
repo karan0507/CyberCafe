@@ -179,6 +179,7 @@ export class ActiveRecordListComponent implements OnInit {
     this.db.getAllActiveUsers().subscribe(res => {
       console.log(res);
       res.map(obj => {
+
         console.log(obj.id);
         const objarray: Array<any> = obj.id;
         if (this.selectedUser['cust_id'] === objarray) {
