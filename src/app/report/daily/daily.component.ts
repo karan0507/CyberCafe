@@ -3,6 +3,8 @@ import { DatabaseServiceService } from 'src/app/database-service.service';
 import { ExportAsConfig, ExportAsService } from 'ngx-export-as';
 import { Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-daily',
@@ -33,7 +35,12 @@ export class DailyComponent implements OnInit {
   total = 'Total';
   balance = 'आजची कॅश  | Credited Cash';
   remark = 'remark';
-  date: Date = new Date();
+  date = moment();
+
+  tomorrow = moment(new Date(), 'DD/MM/YYYY').add(1, 'day');
+  // tomorrow = Date.now() + Date.now();
+  dayparam;
+ // tomorrow = this.date + new Date().getDate();
   // tomorrow =  new Date().getDate() + 1 ;
   options = ['UPI', 'PAYTM', 'CASH' , ' उधारी | BORROWED' , 'BANK TRANSFER', 'उधारी जमा', 'पैशे'];
   customers: Array<any>;
@@ -43,6 +50,10 @@ export class DailyComponent implements OnInit {
  ngOnInit() {
   //  this.getCustomers();
   this.getCustomerDetailsWithBalance();
+  // this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+
+  this.dayparam = { date: this.date.toDate().toISOString(), date2: this.tomorrow.toDate().toISOString() };
+  console.log(this.dayparam);
   }
 
   onKey(event: any) { // without type info
@@ -84,7 +95,7 @@ export class DailyComponent implements OnInit {
 
 
     getCustomerDetailsWithBalance() {
-      this.db.getCustomerWithLastTransaction().subscribe(
+      this.db.getCustTran(this.dayparam).subscribe(
         res => {
           this.customers = res;
           console.log(res);

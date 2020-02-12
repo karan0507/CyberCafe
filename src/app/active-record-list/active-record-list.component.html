@@ -33,7 +33,8 @@
                     placeholder="" aria-controls="example1"></label>
                 </div> -->
             </div>
-            <form [formGroup]="addUser" (submit)="addActiveUser()">
+            <!-- (submit)="addActiveUser()" -->
+            <form [formGroup]="activeGroup">
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
@@ -93,7 +94,7 @@
                                 padding-left: 36px;">-</td> -->
 
 
-                                    <td><button type="submit" class="btn btn-primary" (click)="addActiveUser()" [disabled]="!addUser.valid">Add User</button></td>
+                                    <td><button type="submit" class="btn btn-primary" (click)="addActiveUser()" [disabled]="!activeGroup.valid">Add User</button></td>
 
 
                                 </tr>
@@ -134,7 +135,7 @@
 </div>
 
 <!-- /.container-fluid -->
-<form [formGroup]="activeGroup" (submit)="saveUser()">
+<form [formGroup]="addUser">
     <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -167,7 +168,7 @@
                                 <li class="list-group-item">
                                     <b>Current Amount</b>
                                     <!-- <a class="float-right">{{  | currency:'INR' }}</a> -->
-                                    <input class="float-right" type="text" formControlName="amt" style="float: right; width: 50%;" class="form-control" [(ngModel)]="currentamt">
+                                    <input class="float-right" type="text" formControlName="currentamt" style="float: right; width: 50%;" class="form-control" [(ngModel)]="currentamt">
                                 </li>
                                 <li class="list-group-item">
                                     <b>Payable Amount</b>
@@ -175,7 +176,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <b>Paid Amount</b>
-                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="amt" class="form-control" [(ngModel)]="paidamt">
+                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="paidamt" class="form-control" [(ngModel)]="paidamt">
                                 </li>
                                 <li class="list-group-item">
                                     <b>Payment Type</b>
@@ -193,7 +194,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <b>Remark</b>
-                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="amt" class="form-control" [(ngModel)]="remark">
+                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="remark" class="form-control" [(ngModel)]="remark">
                                 </li>
                                 <li class="list-group-item">
                                     <b>Amount Remaining</b>
@@ -201,7 +202,7 @@
                                 </li>
                             </ul>
 
-                            <button class="btn btn-primary btn-block " data-dismiss="modal" (click)="addTransaction()" [disabled]="!activeGroup.valid"><b>Paid</b></button>
+                            <button class="btn btn-primary btn-block " data-dismiss="modal" (click)="addTransaction()" [disabled]="!addUser.valid"><b>Paid</b></button>
                         </div>
                         <!-- /.card-body -->
                     </div>

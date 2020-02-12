@@ -37,8 +37,13 @@ export class DatabaseServiceService {
      return this.http.delete(this.resturl + 'deleteActiveUsers/' + param);
     }
 
-    getCustTran(): Observable<any> {
-       return this.http.get(this.resturl + 'cust_trans');
+    getAllTransactions(): Observable<any> {
+        return this.http.get(this.resturl + 'transactions');
+    }
+
+    getCustTran(dates): Observable<any> {
+
+       return this.http.get(this.resturl + 'cust_trans', dates );
     }
     listAllCustomers(): Observable<any> {
         return this.http.get(this.resturl + 'customer');
