@@ -52,11 +52,23 @@ export class ActiveRecordListComponent implements OnInit {
   keyword = 'name';
   newcust: Array<any>;
   activeGroup: FormGroup;
+  addUser: FormGroup;
+
   options = ['UPI', 'PAYTM', 'CASH' , ' उधारी | BORROWED' , 'BANK TRANSFER', 'पैशे'];
 
   constructor(private db: DatabaseServiceService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.activeGroup = this.fb.group(
-      { amt: ['', [Validators.required]] });
+      { name: ['', [Validators.required]] });
+
+
+      // ! changed variable name to username for addUser formGroup
+    this.addUser = this.fb.group(
+        {
+          currentamt: ['', [Validators.required]],
+          paidamt: ['', [Validators.required]],
+          remark: ['', [Validators.required]]
+      });
+
 
     this.getAllUser();
   }
@@ -127,10 +139,15 @@ export class ActiveRecordListComponent implements OnInit {
 
   }
 
+
   addTransaction() {
-    console.log(this.selecteduser + this.currbal + this.paidamt);
+    // TODO Get values from modal box and save it in selecteduser or new object variable
+
+    // console.log(this.selecteduser + this.currbal + this.paidamt);
+    // console.log(this.selecteduser['data'] = this.addUser.value  );
+
     console.log('component transaction called');
-    this.db.addTransaction(this.selecteduser);
+    // this.db.addTransaction(this.selecteduser);
 
     // const httpParams = new HttpParams().set('id', );
     // const options = { params: httpParams };
@@ -142,12 +159,12 @@ export class ActiveRecordListComponent implements OnInit {
   }
 
 
-  getTransCust() {
-    this.db.getCustTran().subscribe(res => {
-      console.log(res);
-      this.customers = res;
-    });
-  }
+  // getTransCust() {
+  //   this.db.getCustTran().subscribe(res => {
+  //     console.log(res);
+  //     this.customers = res;
+  //   });
+  // }
 
 
   getActiveUsers() {
@@ -177,37 +194,19 @@ export class ActiveRecordListComponent implements OnInit {
     });
   }
 
+
+   // ? @Karan Make the required changes below
+   // ! STOPED WORKING  STORY ID 178
   addActiveUser() {
     this.db.getAllActiveUsers().subscribe(res => {
-      console.log(res);
-      res.map(obj => {
 
-        console.log(obj.id);
-        const objarray: Array<any> = obj.id;
-        if (this.selectedUser['cust_id'] === objarray) {
-          console.log('Already exists');
-        } else {
-          console.log('doesnt not exists');
-
-          console.log('Active User added');
           this.db.addActiveUsers(this.selectedUser).subscribe(res2 => {
             this.getAllUser();
             this.getCustomers();
             console.log(res2);
           });
-        }
-      });
-      // console.log(this.selectedUser['cust_id']);
-
-    });
-    // this.date = new Date();
+        });
+      }
 
 
-    // console.log('Active User added');
-    // this.db.addActiveUsers(this.selectedUser).subscribe(res => {
-    //   this.getAllUser();
-    //   this.getCustomers();
-    //   console.log(res);
-    // });
-  }
 }

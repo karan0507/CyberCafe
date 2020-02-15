@@ -68,11 +68,11 @@
                         <tbody>
 
                             <tr role="row" class="odd" *ngFor="let customer of customers | filter:filterparam; index as i;">
-                                <td class="sorting_1">{{i}}</td>
+                                <td class="sorting_1">{{customer?.date | date:'long'}}</td>
                                 <td>{{customer?.name}}</td>
                                 <td>{{customer?.phone_no}}</td>
                                 <td>{{remark}}</td>
-                                <td>Type of payment</td>
+                                <td>{{customer?.type}}</td>
                                 <td>{{customer?.bal | currency:'INR'}}</td>
 
                             </tr>
