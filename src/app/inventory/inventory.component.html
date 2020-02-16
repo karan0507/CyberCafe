@@ -1,0 +1,129 @@
+<!-- <app-header></app-header>
+<app-sidenav class="sidebar"></app-sidenav> -->
+<div class="element">
+    <section class="content-header ">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Entry Form</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item active">Entry Form</li>
+                    </ol>
+                </div>
+
+            </div>
+            <div class="row" style="float:right">
+
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Add Inventory</button>
+
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                <thead>
+                    <tr role="row">
+
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 143px;">
+                            <!-- {{payable | uppercase}} -->
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                            <!-- {{pay | uppercase}} -->
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+
+                        <td>
+                            <div class="col-md-4  ng-autocomplete ">
+                                <!-- <ng-autocomplete [data]="newcust" formControlName="name" [searchKeyword]="keyword" (selected)="selectEvent($event)" placeHolder="Enter the  Name" historyIdentifier="states" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                </ng-autocomplete> -->
+
+                                <ng-template #itemTemplate let-item>
+                                    <div class="item">
+                                        <!-- <img src="{{item.flag}}" height="25"> -->
+                                        <span [innerHTML]="item.name"></span> &nbsp; &nbsp;<br>
+                                        <small>Phone Number: {{item.phone_no}} &nbsp; &nbsp;</small>
+                                    </div>
+                                </ng-template>
+
+                                <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                            </div>
+                        </td>
+
+
+                        <!-- <td> {{number}} </td>
+                        <td>{{bal | currency:'INR'}}</td> -->
+                        <!-- <td style="font-size: 47px;
+                    padding-left: 36px;">-</td>
+                    <td style="font-size: 47px;
+                    padding-left: 36px;">-</td> -->
+
+
+                        <td><button type="submit" class="btn btn-primary" (click)="addActiveUser()" [disabled]="!activeGroup.valid">Add User</button></td>
+
+
+                    </tr>
+
+                    <!-- *ngFor="let customer of customers | filter:searchText; -->
+                    <tr role="row" class="odd">
+                        <!-- <td class="sorting_1 ">{{i}}</td> -->
+                        <!-- <td>{{customer.name | uppercase}}</td> -->
+
+                        <!-- <td><button type="button " class="btn btn-block bg-gradient-primary btn-sm " data-toggle="modal " data-target="#modal-default " (click)="onSelect(customer) ">Pay Now</button></td> -->
+                    </tr>
+
+
+
+
+                </tbody>
+                <!-- <tfoot>
+                    <tr>
+                        <th rowspan="1 " colspan="1 ">{{Sr_no}}</th>
+                        <th rowspan="1 " colspan="1 ">{{customer.name}}</th>
+                        <th rowspan="1 " colspan="1 ">Platform(s)</th>
+                        <th rowspan="1 " colspan="1 ">Engine version</th>
+                        <th rowspan="1 " colspan="1 ">CSS grade</th>
+                    </tr>
+                </tfoot> -->
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Default Modal</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

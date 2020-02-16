@@ -24,7 +24,6 @@ const routes: Routes = [
   imports: [
     AutocompleteLibModule,
     Ng2SearchPipeModule,
-    FormsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

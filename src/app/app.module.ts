@@ -21,6 +21,8 @@ import { MonthlyComponent } from './report/monthly/monthly.component';
 import { MonthlyModule } from './report/monthly/monthly.module';
 import { YearlyModule } from './report/yearly/yearly.module';
 import { MyCustomFilterPipePipe } from './my-custom-filter-pipe.pipe';
+import { InventoryComponent } from './inventory/inventory.component';
+import { InventoryModule } from './inventory/inventory.module';
 
 
 
@@ -28,7 +30,8 @@ import { MyCustomFilterPipePipe } from './my-custom-filter-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
+    // InventoryComponent
 
   ],
   entryComponents: [
@@ -41,6 +44,7 @@ import { MyCustomFilterPipePipe } from './my-custom-filter-pipe.pipe';
     RecordListModule,
     ActiveRecordModule,
     DailyModule,
+    InventoryModule,
     RegisterModule,
     HttpClientModule,
     LoginModule,

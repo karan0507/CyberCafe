@@ -24,13 +24,14 @@ export class DatabaseServiceService {
 
     }
 
-    addTransaction(transaction) {
-        this.http.post(this.resturl + 'transaction', transaction).
-        subscribe(res =>  {
-            console.log('database service transaction called' );
-            console.log(res);
-            // this.deleteActicveUser();
-        });
+    addTransaction(transaction): Observable<any> {
+     return this.http.post(this.resturl + 'transaction', transaction);
+        // .
+        // subscribe(res =>  {
+        //     console.log('database service transaction called' );
+        //     console.log(res);
+        //     // this.deleteActicveUser();
+        // });
     }
 
     deleteActicveUser(param): Observable<any> {

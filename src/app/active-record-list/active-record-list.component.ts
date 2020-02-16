@@ -53,7 +53,7 @@ export class ActiveRecordListComponent implements OnInit {
   newcust: Array<any>;
   activeGroup: FormGroup;
   addUser: FormGroup;
-
+  transaction;
   options = ['UPI', 'PAYTM', 'CASH' , ' उधारी | BORROWED' , 'BANK TRANSFER', 'पैशे'];
 
   constructor(private db: DatabaseServiceService, private route: ActivatedRoute, private fb: FormBuilder) {
@@ -74,52 +74,16 @@ export class ActiveRecordListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getCustomers();
-    // this.getTransCust();
-    this.getActiveUsers();
-    this.call();
+
+    // this.getActiveUsers();
     this.cust = this.route.snapshot.data.user;
     console.log(this.cust);
-    this.getDateFromUser();
-    // const timediff = Math.abs(this.now.getTime() - this.mysqlDate.getTime()) / 36e5;
-    // console.log(timediff);
-    // console.log(this.mysqlDate);
   }
 
 
 
-  getDateFromUser() {
-    const cust2 = of(this.cust);
-    cust2.subscribe(res => {
-      res.map(res2 => {
-        console.log(res2.date);
-        this.mysqlDate = new Date(res2.date);
-        console.log(this.mysqlDate);
-      });
-    });
-  }
-
-  call() {
-    setInterval(this.timeUpdate, 1000);
-  }
-
-  // updateBal() {
-  //   this.payableamt.subscribe({
-  //     next(x) { console.log('got value ' + x); },
-  //     error(err) { console.error('something wrong occurred: ' + err); },
-  //     complete() { console.log('done'); }
-  //   });
-  //   console.log('just after subscribe');
-  // }
-
-  timeUpdate() {
-    return this.now = new Date();
-  }
 
 
-  onKey(event: any) { // without type info
-
-  }
 
   // onSelect retreives the selected item from the table and stores it as an object to be used.
   onSelect(selectedItem: any) {
@@ -131,7 +95,7 @@ export class ActiveRecordListComponent implements OnInit {
   }
 
   getCustomers() {
-    this.db.getAllActiveUsers().subscribe(data => {
+    this.db.getCustomerWithLastTransaction().subscribe(data => {
       console.log(data);
       this.customers = data;
 
@@ -142,37 +106,36 @@ export class ActiveRecordListComponent implements OnInit {
 
   addTransaction() {
     // TODO Get values from modal box and save it in selecteduser or new object variable
-
-    // console.log(this.selecteduser + this.currbal + this.paidamt);
-    // console.log(this.selecteduser['data'] = this.addUser.value  );
-
+    // this.selecteduser = this.transaction;
+    // this.transaction['bal'] = 100;
+    // this.transaction['credit_bal'] = 50;
+    // this.transaction['type'] = 'UPI';
+    // this.transaction['cid'] = this.selecteduser['cust_id'];
     console.log('component transaction called');
-    // this.db.addTransaction(this.selecteduser);
-
-    // const httpParams = new HttpParams().set('id', );
-    // const options = { params: httpParams };
-
+    this.selecteduser['type'] = 100;
+    this.selecteduser['credit_bal'] = 10;
+    this.selecteduser['debit_bal'] = 0;
+    this.selecteduser['bal'] = 90;
+    console.log(this.selecteduser);
+    this.db.addTransaction(this.selecteduser).subscribe(res => {
+      console.log(res);
+    });
     this.db.deleteActicveUser(this.aid).subscribe(res => {
       console.log(res);
-      this.getCustomers();
+      this.getAllUser();
     });
   }
 
 
-  // getTransCust() {
-  //   this.db.getCustTran().subscribe(res => {
+
+
+
+  // getActiveUsers() {
+  //   this.db.getAllActiveUsers().subscribe(res => {
   //     console.log(res);
   //     this.customers = res;
   //   });
   // }
-
-
-  getActiveUsers() {
-    this.db.getAllActiveUsers().subscribe(res => {
-      console.log(res);
-      this.customers = res;
-    });
-  }
 
 
   selectEvent(item) {
@@ -198,14 +161,13 @@ export class ActiveRecordListComponent implements OnInit {
    // ? @Karan Make the required changes below
    // ! STOPED WORKING  STORY ID 178
   addActiveUser() {
-    this.db.getAllActiveUsers().subscribe(res => {
 
           this.db.addActiveUsers(this.selectedUser).subscribe(res2 => {
             this.getAllUser();
-            this.getCustomers();
+            // this.getCustomers();
             console.log(res2);
           });
-        });
+
       }
 
 

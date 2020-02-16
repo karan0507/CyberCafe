@@ -198,7 +198,8 @@
                                 </li>
                                 <li class="list-group-item">
                                     <b>Amount Remaining</b>
-                                    <a class="float-right">{{ paidamt - currentamt + selecteduser?.bal | currency:'INR'}}</a>
+                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="remark" class="form-control" [(ngModel)]="newbalance" value="{{paidamt - currentamt + selecteduser?.bal | currency:'INR'}}" disabled>
+                                    <!-- <a class="float-right">{{ paidamt - currentamt + selecteduser?.bal | currency:'INR'}}</a> -->
                                 </li>
                             </ul>
 

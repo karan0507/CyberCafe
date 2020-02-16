@@ -105,7 +105,7 @@ function createRouter(db) {
     // Get Users With last transaction
     router.get('/last_trans', function(req, res, next) {
         db.query(
-            'SELECT id as cust_id,name,address,phone_no,email_address,max(tid) as maxtid,bal from customer INNER JOIN transaction on customer.id = transaction.cid group by customer.id; ', /* [req.params.id], */
+            'SELECT id as cust_id,name,address,phone_no,email_address,max(tid) as maxtid, max(bal) as bal from customer INNER JOIN transaction on customer.id = transaction.cid group by customer.id; ', /* [req.params.id], */
             (error, results) => {
                 if (error) {
                     console.log(error);

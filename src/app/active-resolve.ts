@@ -9,6 +9,6 @@ export class ActiveResolve  implements Resolve<any> {
 
     constructor(private  dataservice: DatabaseServiceService) { }
  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot ): Observable<any> {
-    return this.dataservice.getAllActiveUsers();
+    return this.dataservice.getCustomerWithLastTransaction();
   }
 }
