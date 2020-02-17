@@ -22,51 +22,100 @@
                                 [(ngModel)]="searchText" (keyup)="onKey($event)" class="form-control form-control-sm"
                                 placeholder="" aria-controls="example1"></label>
                     </div>
+
                 </div>
+                <!-- <div id="example1_filter" class="dataTables_filter"><label>Rate:<input type="text"
+                    [(ngModel)]="rate" class="form-control form-control-sm"
+                    placeholder="" aria-controls="example1"></label>
+                </div> -->
+                <!-- <div id="example1_filter" class="dataTables_filter"><label>Hours:<input type="text"
+                    [(ngModel)]="rate" class="form-control form-control-sm"
+                    placeholder="" aria-controls="example1"></label>
+                </div> -->
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-                        <thead>
-                            <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 70px;">{{ srNo | uppercase}}</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 219px;">
-                                    {{Name | uppercase}}</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 194px;">
-                                    {{phone | uppercase}}</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 143px;">{{starttime | uppercase}}</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+            <!-- (submit)="addActiveUser()" -->
+            <form [formGroup]="activeGroup">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 70px;">{{ srNo | uppercase}}</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 219px;">
+                                        {{Name | uppercase}}</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 194px;">
+                                        {{phone | uppercase}}</th>
+                                    <!-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 143px;">{{starttime | uppercase}}</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 143px;">{{livetime | uppercase}}</th> -->
+
+                                    <!-- <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
                                     {{prevbal | uppercase }}
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 143px;">
                                     {{currbal | uppercase}}
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 143px;">
-                                    {{payable | uppercase}}
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
-                                    {{pay | uppercase}}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                                </th> -->
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 143px;">
+                                        {{payable | uppercase}}
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                                        {{pay | uppercase}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <tr role="row" class="odd" *ngFor="let customer of customers | filter:searchText; index as i;">
-                                <td class="sorting_1">{{i}}</td>
-                                <td>{{customer.name | uppercase}}</td>
-                                <td>{{customer.phone_no}}</td>
-                                <td>{{todayDate | date :'short'}}</td> 
-                                <td>{{customer.bal}}</td>
-                                <td>{{customer.credit_bal}}</td>
-                                <td>{{ customer.credit_bal - customer.bal }}</td>
-                                <td><button type="button" class="btn btn-block bg-gradient-primary btn-sm" data-toggle="modal" data-target="#modal-default" (click)="onSelect(customer)">Pay Now</button></td>
-                            </tr>
+                                <tr>
+                                    <td>000</td>
+                                    <td>
+                                        <div class="col-md-4  ng-autocomplete ">
+                                            <ng-autocomplete [data]="newcust" formControlName="name" [searchKeyword]="keyword" (selected)="selectEvent($event)" placeHolder="Enter the  Name" historyIdentifier="states" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                            </ng-autocomplete>
+
+                                            <ng-template #itemTemplate let-item>
+                                                <div class="item">
+                                                    <!-- <img src="{{item.flag}}" height="25"> -->
+                                                    <span [innerHTML]="item.name"></span> &nbsp; &nbsp;<br>
+                                                    <small>Phone Number: {{item.phone_no}} &nbsp; &nbsp;</small>
+                                                </div>
+                                            </ng-template>
+
+                                            <ng-template #notFoundTemplate let-notFound>
+                                                <div [innerHTML]="notFound"></div>
+                                            </ng-template>
+                                        </div>
+                                    </td>
+
+
+                                    <td> {{number}} </td>
+                                    <td>{{bal | currency:'INR'}}</td>
+                                    <!-- <td style="font-size: 47px;
+                                padding-left: 36px;">-</td>
+                                <td style="font-size: 47px;
+                                padding-left: 36px;">-</td> -->
+
+
+                                    <td><button type="submit" class="btn btn-primary" (click)="addActiveUser()" [disabled]="!activeGroup.valid">Add User</button></td>
+
+
+                                </tr>
+                                <tr role="row" class="odd" *ngFor="let customer of customers | filter:searchText; index as i;">
+                                    <td class="sorting_1">{{i}}</td>
+                                    <td>{{customer.name | uppercase}}</td>
+                                    <td>{{customer.phone_no}}</td>
+                                    <!-- <td>{{customer.date | date :'short' }}</td>
+                                <td>{{ timeUpdate() | date :'short'}}</td> -->
+                                    <td>{{customer?.bal | currency:'INR'}}</td>
+
+                                    <!-- <td>{{rate | currency:'INR'}}</td>
+                                <td>{{ payableamt | async | currency:'INR'}}</td> -->
+                                    <td><button type="button" class="btn btn-block bg-gradient-primary btn-sm" data-toggle="modal" data-target="#modal-default" (click)="onSelect(customer)">Pay Now</button></td>
+                                </tr>
 
 
 
 
-                        </tbody>
-                        <!-- <tfoot>
+                            </tbody>
+                            <!-- <tfoot>
                                 <tr>
                                     <th rowspan="1" colspan="1">{{Sr_no}}</th>
                                     <th rowspan="1" colspan="1">{{customer.name}}</th>
@@ -75,69 +124,99 @@
                                     <th rowspan="1" colspan="1">CSS grade</th>
                                 </tr>
                             </tfoot> -->
-                    </table>
+                        </table>
 
+                    </div>
                 </div>
-            </div>
-
+            </form>
         </div>
     </div>
     <!-- /.card-body -->
 </div>
+
 <!-- /.container-fluid -->
-<div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Default Modal</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<form [formGroup]="addUser">
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Default Modal</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-            <div class="modal-body">
-                <div class="card card-primary card-outline">
-                    <div class="card-body box-profile">
-                        <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
-                        </div>
-
-                        <h3 class="profile-username text-center">{{ selecteduser?.name }}</h3>
-
-                        <p class="text-muted text-center">{{selecteduser?.phone_no}}</p>
-
-                        <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <b>Previous Balance</b>
-                                <a class="float-right"></a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Current Amount</b>
-                                <a class="float-right"></a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Payable Amount</b>
-                                <a class="float-right"></a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Paid Amount</b>
-                                <input type="text" class="form-control" placeholder="Enter ...">
-                            </li>
-
-                        </ul>
-
-                        <a class="btn btn-primary btn-block" (click)="addTransaction()"><b>Paid</b></a>
-                    </div>
-                    <!-- /.card-body -->
                 </div>
-            </div>
-            <div class="modal-footer justify-content-between">
+                <div class="modal-body">
+                    <div class="card card-primary card-outline">
+
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                <!-- <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture"> -->
+                            </div>
+
+                            <h3 class="profile-username text-center">{{ selecteduser?.name }}</h3>
+
+                            <p class="text-muted text-center">{{selecteduser?.phone_no}}</p>
+                            <p> {{ now | date :'short'}}</p>
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <!-- <td></td>
+                                <td></td>
+                                <td></td> -->
+                                    <b>Previous Balance</b>
+                                    <a class="float-right">{{selecteduser?.bal | currency:'INR'}}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Current Amount</b>
+                                    <!-- <a class="float-right">{{  | currency:'INR' }}</a> -->
+                                    <input class="float-right" type="text" formControlName="currentamt" style="float: right; width: 50%;" class="form-control" [(ngModel)]="currentamt">
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Payable Amount</b>
+                                    <a class="float-right">{{ currentamt - selecteduser?.bal}}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Paid Amount</b>
+                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="paidamt" class="form-control" [(ngModel)]="paidamt">
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Payment Type</b>
+                                    <select class="form-control" style="float: right; width: 50%;" (change)="onChange($event.target.value)">
+                                        <option >Select by Type</option>
+                                        <option *ngFor="let option of options" [value]="option"  >
+                                            {{ option }}
+                                        </option>
+                                        <!-- <option value="">UPI</option>
+                                        <option value="">Cash</option>
+                                        <option value="">Lend</option>
+                                        <option value="">Deposits</option>
+                                        <option value="">Excess Deposits</option> -->
+                                    </select>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Remark</b>
+                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="remark" class="form-control" [(ngModel)]="remark">
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Amount Remaining</b>
+                                    <input class="float-right" style="float: right; width: 50%;" type="text" formControlName="remark" class="form-control" [(ngModel)]="newbalance" value="{{paidamt - currentamt + selecteduser?.bal | currency:'INR'}}" disabled>
+                                    <!-- <a class="float-right">{{ paidamt - currentamt + selecteduser?.bal | currency:'INR'}}</a> -->
+                                </li>
+                            </ul>
+
+                            <button class="btn btn-primary btn-block " data-dismiss="modal" (click)="addTransaction()" [disabled]="!addUser.valid"><b>Paid</b></button>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!-- <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
             </div>
+            <!-- /.modal-content -->
+            <!-- /.modal-dialog -->
+            <!-- /.modal -->
         </div>
-        <!-- /.modal-content -->
-        <!-- /.modal-dialog -->
-        <!-- /.modal -->
     </div>
-</div>
+</form>
 <!-- </form> -->

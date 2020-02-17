@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
 // Create DB here
 connection.connect();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8880;
 
 const app = express()
     .use(cors())

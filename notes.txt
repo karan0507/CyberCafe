@@ -1,0 +1,43 @@
+//
+ Insert records in active Users 
+
+ --> Insert into activeUsers (...date) values (???),[MAX(date)]; 
+https://stackoverflow.com/questions/25969/insert-into-values-select-from
+//
+
+
+// daily report
+
+--> Select * from transaction orderby Date and where date=today
+
+//
+
+// Indiviual report
+
+Select * from transaction orderby Date and where cid=?
+
+// Update activeUsers and insert new transaction (dashboard on paid button)
+
+begin().
+db.query
+(Update activeUsers () values () where cid = ?)
+
+.db
+.query(Insert into transaction () values () where cid =? )
+
+// 
+
+
+
+//
+
+// Creates spawn where we call cmd.exe and cmd runs .bat file which contents all silent install batch.
+https://nodejs.org/api/child_process.html
+
+//batch file execution
+
+https://stackoverflow.com/questions/36601121/how-to-execute-a-bat-file-from-node-js-passing-some-parameters
+
+How to handle files and image files in electron store in db ? In fs ? 
+
+How to call bat file only once when installing the software.

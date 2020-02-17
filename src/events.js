@@ -20,7 +20,7 @@ function createRouter(db) {
 
     // Write create Table queries directly here 
 
-
+    let id;
     // Write all CRUD Operations with router.post()/router.get() and etc
     router.post('/login', (req, res, next) => {
         console.log("accessed event");
@@ -51,21 +51,105 @@ function createRouter(db) {
         );
     });
 
+    // router.post('/customer', (req, res, next) => {
+    //     console.log("accessed customer");
+    //     db.query(
+    //         'INSERT INTO customer (name, phone_no, address, profile_pic, id_proof, email_address, remark) VALUES (?,?,?,?,?,?,?)', [req.body.name, req.body.phone_no, req.body.address, req.body.profile_pic, req.body.id_proof, req.body.email_address, req.body.remark],
+    //         (error, result) => {
+    //             if (error) {
+    //                 console.error(error);
+    //                 res.status(500).json({ status: 'adsadasdas' });
+    //             } else {
+    //                 res.status(200).json({ status: 'ok', });
+
+    //             }
+
+    //         });
+
+    // });
+
     router.post('/customer', (req, res, next) => {
-        console.log("accessed customer");
-        db.query(
-            'INSERT INTO customer (name, phone_no, address, profile_pic, id_proof, email_address, remark) VALUES (?,?,?,?,?,?,?)', [req.body.name, req.body.phone_no, req.body.address, req.body.profile_pic, req.body.id_proof, req.body.email_address, req.body.remark],
-            (error) => {
+        db.beginTransaction(function(err) {
+            if (err) { throw err; }
+            db.query('INSERT INTO customer (name, phone_no, address, profile_pic, id_proof, email_address, remark) VALUES (?,?,?,?,?,?,?)', [req.body.name, req.body.phone_no, req.body.address, req.body.profile_pic, req.body.id_proof, req.body.email_address, req.body.remark], function(error, results, fields) {
                 if (error) {
-                    console.error(error);
-                    res.status(500).json({ status: 'adsadasdas' });
+                    return db.rollback(function() {
+                        throw error;
+                    });
+                }
+
+                //  var log = 'Post ' + results.insertId + ' added';
+
+                db.query('INSERT INTO transaction (type, debit_bal,credit_bal,bal,cid) VALUES (?,?,?,?,?)', ['none', '0', '0', '0', results.insertId], function(error, results, fields) {
+                    if (error) {
+                        return db.rollback(function() {
+                            throw error;
+                        });
+                    }
+                    db.commit(function(err) {
+                        if (err) {
+                            return db.rollback(function() {
+                                throw err;
+                            });
+                        }
+                        console.log('success!');
+                    });
+                });
+            });
+        });
+    });
+    //
+
+
+
+    // Get Users With last transaction
+    router.get('/last_trans', function(req, res, next) {
+        db.query(
+            'SELECT id as cust_id,name,address,phone_no,email_address,max(tid) as maxtid, max(bal) as bal from customer INNER JOIN transaction on customer.id = transaction.cid group by customer.id; ', /* [req.params.id], */
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
                 } else {
-                    res.status(200).json({ status: 'ok' });
+                    res.status(200).json(results);
                 }
             }
         );
     });
 
+
+    //
+
+    router.post('/trans', (req, res, next) => {
+        console.log("accessed customer");
+        db.query('INSERT INTO transaction (type, debit_bal,credit_bal,bal,cid) VALUES (?,?,?,?,?)', ['none', '0', '0', '0', result.insertId],
+            (error, result) => {
+                if (error) {
+                    console.error(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json({ status: 'ok' });
+                    console.log(result);
+                }
+            });
+    });
+
+    /*
+
+    */
+    /* 
+    db.query('INSERT INTO transaction (type, debit_bal,credit_bal,bal,cid) VALUES (?,?,?,?,?)'), ['none', '0', '0', '0', result.insertId],
+                                (error) => {
+                                    if (error) {
+                                        console.error(error);
+                                        res.status(500).json({ status: 'error' });
+                                    } else {
+                                        res.status(200).json({ status: 'ok' });
+                                        console.log('jigi' + result);
+                                    }
+                                }
+
+    */
     router.get('/customer', (req, res, next) => {
         console.log("accessed customer");
         db.query(
@@ -86,7 +170,7 @@ function createRouter(db) {
 
     router.get('/customer/:id', function(req, res, next) {
         db.query(
-            'SELECT * FROM customer WHERE id=?', [req.params.id],
+            'SELECT * max(tid) FROM customer WHERE id=? ', [req.params.id],
             (error, results) => {
                 if (error) {
                     console.log(error);
@@ -129,6 +213,27 @@ function createRouter(db) {
 
 
     // Transactions
+
+
+    // GET All Transactions By Particular Day
+
+    router.get('/cust_trans', function(req, res, next) {
+        console.log('cust_trans');
+        db.query(
+            'SELECT * from transaction INNER JOIN customer on transaction.cid = customer.id where date >= ? and date < ?', [req.body.date, req.body.date2],
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
+
     router.post('/transaction', (req, res, next) => {
         console.log('database transaction called');
         db.query(
@@ -145,10 +250,33 @@ function createRouter(db) {
     });
 
 
+    // router.post('/trans_new', (req, res, next) => {
+    //     console.log('database transaction called');
+    //     db.query(
+    //         'INSERT INTO transaction (type, debit_bal,credit_bal,bal,cid) VALUES (?,?,?,?,?)', [req.body.type, req.body.debit_bal, req.body.credit_bal, req.body.bal, req.body.cid],
+    //         (error) => {
+    //             if (error) {
+    //                 console.error(error);
+    //                 res.status(500).json({ status: 'adsadasdas' });
+    //             } else {
+    //                 res.status(200).json({ status: 'ok' });
+    //             }
+    //         }
+    //     );
+    // });
 
-    router.get('/cust_trans', function(req, res, next) {
+
+
+
+    // Transactions End
+
+
+
+
+    //  
+    router.get('/activeUsers', function(req, res, next) {
         db.query(
-            'SELECT * from transaction INNER JOIN customer on transaction.cid = customer.id ', /* [req.params.id], */
+            'SELECT * FROM active_users inner join customer on active_users.cust_id = customer.id inner join transaction on active_users.tran_id = transaction.tid', /* [req.params.id], */
             (error, results) => {
                 if (error) {
                     console.log(error);
@@ -160,7 +288,37 @@ function createRouter(db) {
         );
     });
 
-    // Transactions End
+    router.post('/addActiveUsers', function(req, res, next) {
+        db.query(
+            'Insert into active_users (cust_id, tran_id, status) VALUES (?,?,"active")', [req.body.cust_id, req.body.maxtid], /* [req.params.id], */
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
+
+    router.delete('/deleteActiveUsers/:id', function(req, res, next) {
+        console.log('transaction deleting');
+        db.query(
+            'DELETE FROM active_users WHERE active_id=? ', [req.params.id],
+            (error) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json({ status: 'ok' });
+                }
+            }
+        );
+    });
+
+    //
     router.get('/event', function(req, res, next) {
         db.query(
             'SELECT id, name, description, date FROM events WHERE owner=? ORDER BY date LIMIT 10 OFFSET ?', [owner, 10 * (req.params.page || 0)],

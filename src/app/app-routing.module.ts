@@ -10,6 +10,11 @@ import { RegisterModule } from './register/register.module';
 import { ActiveRecordModule } from './active-record/active-record.module';
 import { RecordListModule } from './record-list/record-list.module';
 import { ActiveRecordListModule } from './active-record-list/active-record-list.module';
+import { DailyComponent } from './report/daily/daily.component';
+import { DailyModule } from './report/daily/daily.module';
+import { MonthlyModule } from './report/monthly/monthly.module';
+import { YearlyModule } from './report/yearly/yearly.module';
+import { ActiveResolve } from './active-resolve';
 
 
 const routes: Routes = [
@@ -41,11 +46,24 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: ActiveRecordListModule
+  },
+  {
+    path: 'daily',
+    component: DailyModule
+  },
+  {
+    path: 'monthly',
+    component: MonthlyModule
+  },
+  {
+    path: 'yearly',
+    component: YearlyModule
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ActiveResolve]
 })
 export class AppRoutingModule { }

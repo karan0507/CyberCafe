@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { HeaderModule } from '../header/header.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [ActiveRecordComponent],
   imports: [
-    TextInputAutocompleteModule,
+    AutocompleteLibModule,
     ReactiveFormsModule,
     HeaderModule,
     SidenavModule,

@@ -1,10 +1,12 @@
 <!-- <app-header></app-header>
 <app-sidenav class="sidebar"></app-sidenav> -->
+<!-- Register Page -->
 <div class="element">
     <section class="content-header ">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
+                    <!--Registeration general form-->
                     <h1>General Form</h1>
                 </div>
                 <div class="col-sm-6">
@@ -29,12 +31,13 @@
                     <!-- /.card-header -->
                     <!-- form start -->
                     <form [formGroup]="registerForm" (submit)="saveUser()">
-
+                        <!--Entering the user details with validators for form values-->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Name</label>
+                                        
                                         <input type="text" formControlName="name" id="name" class="form-control" placeholder="Enter email">
                                     </div>
                                     <div *ngIf="registerForm.get('name').invalid && (registerForm.get('name').dirty || registerForm.get('name').touched)" class="alert alert-danger">
@@ -58,9 +61,23 @@
                                         <label for="exampleInputEmail1">Phone Number</label>
                                         <input type="tel" formControlName="phone_no" class="form-control" id="phone_no" placeholder="Enter Phone Number">
                                     </div>
+                                    <div *ngIf="registerForm.get('phone_no').invalid && (registerForm.get('phone_no').dirty || registerForm.get('phone_no').touched)" class="alert alert-danger">
+
+                                        <div *ngIf="registerForm.get('phone_no').errors.required">
+                                            Phone no is required.
+                                        </div>
+                                        <div *ngIf="registerForm.get('phone_no').errors.minlength">
+                                            Phone must be at least 10 characters long.
+                                        </div>
+                                        <div *ngIf="registerForm.get('phone_no').errors.maxlength">
+                                            Phone number must be at most 10 characters long.
+                                        </div>
+                                        
+                                    </div>
 
                                 </div>
                             </div>
+                            <!--Upload Photo and proof-->
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -71,9 +88,23 @@
                                                 <label class="custom-file-label" for="exampleInputFile">Choose
                                                     file</label>
                                             </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
+
+
+                                        </div>
+                                        <div *ngIf="registerForm.get('photo').invalid && (registerForm.get('photo').dirty || registerForm.get('photo').touched)" class="alert alert-danger">
+
+                                            <div *ngIf="registerForm.get('photo').errors.required">
+                                                Image is required.
                                             </div>
+                                            <div *ngIf="registerForm.get('photo').errors.minlength">
+                                                Phone must be at least 10 characters long.
+                                            </div>
+                                            <div *ngIf="registerForm.get('photo').errors.maxlength">
+                                                Phone number must be at most 10 characters long.
+                                            </div>
+                                            <!-- <div *ngIf="registerForm.get('phone_no').errors">
+                                                Name cannot be Bob.
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -86,9 +117,22 @@
                                                 <label class="custom-file-label" for="exampleInputFile">Choose
                                                     file</label>
                                             </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
+
+                                        </div>
+                                        <div *ngIf="registerForm.get('id_photo').invalid && (registerForm.get('id_photo').dirty || registerForm.get('id_photo').touched)" class="alert alert-danger">
+
+                                            <div *ngIf="registerForm.get('id_photo').errors.required">
+                                                Image is required.
                                             </div>
+                                            <div *ngIf="registerForm.get('id_photo').errors.minlength">
+                                                Phone must be at least 10 characters long.
+                                            </div>
+                                            <div *ngIf="registerForm.get('id_photo').errors.maxlength">
+                                                Phone number must be at most 10 characters long.
+                                            </div>
+                                            <!-- <div *ngIf="registerForm.get('phone_no').errors">
+                                                Name cannot be Bob.
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -97,9 +141,27 @@
                                         <label for="exampleInputEmail1">Email address</label>
                                         <input type="email" formControlName="email_address" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                                     </div>
+                                    <div *ngIf="registerForm.get('email_address').invalid && (registerForm.get('email_address').dirty || registerForm.get('email_address').touched)" class="alert alert-danger">
+
+                                        <div *ngIf="registerForm.get('email_address').errors.required">
+                                            Email is required.
+                                        </div>
+                                        <div *ngIf="registerForm.get('email_address').errors.minlength">
+                                            Email must be at least 6 characters long.
+                                        </div>
+                                        <div *ngIf="registerForm.get('email_address').errors.maxlength">
+                                            Email must be at most 10 characters long.
+                                        </div>
+                                        <div *ngIf="registerForm.get('email_address').errors.email">
+                                            Enter a valid email address
+                                        </div>
+                                        <!-- <div *ngIf="registerForm.get('phone_no').errors">
+                                            Name cannot be Bob.
+                                        </div> -->
+                                    </div>
                                 </div>
                             </div>
-
+                            <!--Gender Selection-->
                             <div class="row">
                                 <div class="form-group">
                                     &nbsp; <label for="">Gender</label> <br>
@@ -142,8 +204,10 @@
                             </div>
                         </div>
                         <!-- /.card-body -->
+                        <!--Submiting the register form -->
 
                         <div class="card-footer">
+
                             <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Submit</button>
                         </div>
                     </form>
@@ -172,5 +236,35 @@
                 <!--/.col (right) -->
             </div>
             <!-- /.row -->
+        </div>
+
+        <!--Storing photo for proof-->
+        <button type="button" (click)="genBase64(webcam)" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+            Launch Default Modal
+          </button>
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Take A Picture</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <ack-webcam #webcam [options]="options" (success)="onCamSuccess($event)" (catch)="onCamError($event)"></ack-webcam>
+                    </div>
+                    <button (click)="genBase64(webcam)">
+                        Click a pic
+                    </button>
+                    <!-- <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
     </div>

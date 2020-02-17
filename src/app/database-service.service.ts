@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class DatabaseServiceService {
     // pal = {name: '1', description: 'shasd', date: 'sa'};
-    resturl = 'http://localhost:8080/';
+    resturl = 'http://localhost:8880/';
     constructor(private http: HttpClient) {
 
     }
@@ -18,21 +18,53 @@ export class DatabaseServiceService {
      return this.http.get(this.resturl + 'login');
     }
 
-    addUser(user) {
+    addUser(user): Observable<any> {
         // console.log(this.pal);
-        this.http.post('http://localhost:8080/' + 'customer' , user).subscribe(res => console.log(res));
+       return this.http.post('http://localhost:8880/' + 'customer' , user);
+
     }
 
-    addTransaction(transaction) {
-        this.http.post(this.resturl + 'transaction', transaction).subscribe(res =>  console.log('database service transaction called'));
+    addTransaction(transaction): Observable<any> {
+     return this.http.post(this.resturl + 'transaction', transaction);
+        // .
+        // subscribe(res =>  {
+        //     console.log('database service transaction called' );
+        //     console.log(res);
+        //     // this.deleteActicveUser();
+        // });
     }
 
-    getCustTran(): Observable<any> {
-       return this.http.get(this.resturl + 'cust_trans');
+    deleteActicveUser(param): Observable<any> {
+     return this.http.delete(this.resturl + 'deleteActiveUsers/' + param);
+    }
+
+    getAllTransactions(): Observable<any> {
+        return this.http.get(this.resturl + 'transactions');
+    }
+
+    getCustTran(dates): Observable<any> {
+
+       return this.http.get(this.resturl + 'cust_trans', dates );
     }
     listAllCustomers(): Observable<any> {
         return this.http.get(this.resturl + 'customer');
 
+    }
+
+    getCustomerWithLastTransaction(): Observable<any> {
+        console.log('hello');
+        return this.http.get(this.resturl + 'last_trans');
+    }
+
+    addActiveUsers(user): Observable<any> {
+        console.log('active user in service');
+        return this.http.post(this.resturl + 'addActiveUsers' , user);
+    }
+
+
+
+    getAllActiveUsers(): Observable<any> {
+      return this.http.get(this.resturl + 'activeUsers');
     }
 
 }

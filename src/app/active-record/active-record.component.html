@@ -38,21 +38,37 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Name</label>
-                                        <mwl-text-input-autocomplete-container>
-                                        <input type="text" class="form-control"  [(ngModel)]="formControlValue"  mwlTextInputAutocomplete
-                                         [findChoices]="findChoices"  [getChoiceLabel]="getChoiceLabel" formControlName="name" placeholder="Enter Name">
-                                         </mwl-text-input-autocomplete-container>
+                                        <div class="col-md-10  ng-autocomplete ">
+                                            <ng-autocomplete [data]="customers" [searchKeyword]="keyword" (selected)="selectEvent($event)" placeHolder="Enter the  Name" historyIdentifier="states" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                            </ng-autocomplete>
+
+                                            <ng-template #itemTemplate let-item>
+                                                <div class="item">
+                                                    <!-- <img src="{{item.flag}}" height="25"> -->
+                                                    <span [innerHTML]="item.name"></span> &nbsp; &nbsp;<br>
+                                                    <small>Phone Number: {{item.phone_no}} &nbsp; &nbsp;</small>
+                                                </div>
+                                            </ng-template>
+
+                                            <ng-template #notFoundTemplate let-notFound>
+                                                <div [innerHTML]="notFound"></div>
+                                            </ng-template>
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- <div class="col-md-6 ">
+
+                                </div> -->
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Phone Number</label>
-                                        <input type="tel" class="form-control" formControlName="number" placeholder="Enter Phone Number">
+                                        <input type="tel" class="form-control" formControlName="number" placeholder="Enter Phone Number" value="{{number}}" disabled>
                                     </div>
 
                                 </div>
                             </div>
-                            
+
 
                             <!-- <div class="row">
                                 <div class="form-group">
@@ -87,7 +103,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email Address</label>
-                                        <input type="email" class="form-control" formControlName="email" placeholder="Enter Email Address">
+                                        <input type="email" class="form-control" formControlName="email" placeholder="Enter Email Address" value="{{email}}" disabled>
                                     </div>
 
                                 </div>
@@ -97,7 +113,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Address</label>
-                                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        <textarea class="form-control" rows="3" placeholder="Enter ..." value="{{address}}" disabled></textarea>
                                     </div>
                                 </div>
 
@@ -107,7 +123,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" (click)="addActiveUser()">Submit</button>
                         </div>
                     </form>
                 </div>
