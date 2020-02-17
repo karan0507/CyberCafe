@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryComponent implements OnInit {
 
+  srno = 'SR NO';
+  invname = 'Inventory Names';
+  adduser = 'Add Inventory / Delete Inventory ';
+
+
+  inventory; // Inventory Object
   constructor() { }
 
   ngOnInit() {

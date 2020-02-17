@@ -33,21 +33,24 @@
                     <tr role="row">
 
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 143px;">
-                            <!-- {{payable | uppercase}} -->
+                            {{srno | uppercase}}
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
-                            <!-- {{pay | uppercase}} -->
+                            {{invname | uppercase}}
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                            {{adduser | uppercase}}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
 
                     <tr>
-
+                        <td></td>
                         <td>
                             <div class="col-md-4  ng-autocomplete ">
-                                <!-- <ng-autocomplete [data]="newcust" formControlName="name" [searchKeyword]="keyword" (selected)="selectEvent($event)" placeHolder="Enter the  Name" historyIdentifier="states" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
-                                </ng-autocomplete> -->
+                                <ng-autocomplete [data]="newcust" [searchKeyword]="keyword" (selected)="selectEvent($event)" placeHolder="Enter the  Name" historyIdentifier="states" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                </ng-autocomplete>
 
                                 <ng-template #itemTemplate let-item>
                                     <div class="item">
