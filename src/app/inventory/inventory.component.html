@@ -15,7 +15,7 @@
                 </div>
 
             </div>
-            <div class="row" style="float:right">
+            <div class="row" style="float:right; padding-left: 5%; padding-top: 2%;">
 
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Add Inventory</button>
 
@@ -26,19 +26,31 @@
 
 
 
-    <div class="row">
+    <div class="row" style=" padding-right: 15%; padding-top: 5%;">
         <div class="col-sm-12">
-            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                aria-describedby="example1_info">
                 <thead>
                     <tr role="row">
 
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 143px;">
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="width: 143px;">
                             {{srno | uppercase}}
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
                             {{invname | uppercase}}
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                            {{invname | uppercase}}
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                            {{invname | uppercase}}
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                            aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
                             {{adduser | uppercase}}
                         </th>
                     </tr>
@@ -49,7 +61,10 @@
                         <td></td>
                         <td>
                             <div class="col-md-4  ng-autocomplete ">
-                                <ng-autocomplete [data]="newcust" [searchKeyword]="keyword" (selected)="selectEvent($event)" placeHolder="Enter the  Name" historyIdentifier="states" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                <ng-autocomplete [data]="newcust" [searchKeyword]="keyword"
+                                    (selected)="selectEvent($event)" placeHolder="Enter the  Name"
+                                    historyIdentifier="states" [itemTemplate]="itemTemplate"
+                                    [notFoundTemplate]="notFoundTemplate">
                                 </ng-autocomplete>
 
                                 <ng-template #itemTemplate let-item>
@@ -60,11 +75,13 @@
                                     </div>
                                 </ng-template>
 
+
                                 <ng-template #notFoundTemplate let-notFound>
                                     <div [innerHTML]="notFound"></div>
                                 </ng-template>
                             </div>
                         </td>
+                        
 
 
                         <!-- <td> {{number}} </td>
@@ -73,9 +90,10 @@
                     padding-left: 36px;">-</td>
                     <td style="font-size: 47px;
                     padding-left: 36px;">-</td> -->
-
-
-                        <td><button type="submit" class="btn btn-primary" (click)="addActiveUser()" [disabled]="!activeGroup.valid">Add User</button></td>
+<td></td>
+<td></td>
+                        <td><button type="submit" class="btn btn-primary" (click)="addActiveUser()"
+                                [disabled]="!activeGroup.valid">Add User</button></td>
 
 
                     </tr>
@@ -114,8 +132,8 @@
             <div class="modal-header">
                 <h4 class="modal-title">Default Modal</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <p>One fine body&hellip;</p>
