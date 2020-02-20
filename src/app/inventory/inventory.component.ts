@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseServiceService } from '../database-service.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-inventory',
@@ -16,14 +17,25 @@ export class InventoryComponent implements OnInit {
   price = 'Price';
   remark = 'remark';
 
- 
+ inventoryform: FormGroup;
+
 
   inventory; // Inventory Object
-  constructor(private db: DatabaseServiceService, private router: Router) { }
+  constructor(private db: DatabaseServiceService, private router: Router, private fb: FormBuilder) {
+    this.inventoryform = this.fb.group({
+      invname: ['', [Validators.required]],
+      invdisc: ['', [Validators.required]],
+      invqty: ['', [Validators.required]],
+      invprice: ['', [Validators.required]],
+      c: ['', [Validators.required]]
+
+  });
+   }
 
   ngOnInit() {
     this.listInventory();
   }
+
 
   listInventory() {
     this.db.getAllInventory().subscribe(
@@ -31,5 +43,12 @@ export class InventoryComponent implements OnInit {
         console.log(res);
         this.inventory = res;
       });
+  }
+
+  addInventory() {
+    this.db.addInventory(this.inventoryform.value).subscribe(res => {
+      console.log(res);
+      this.listInventory();
+    });
   }
 }

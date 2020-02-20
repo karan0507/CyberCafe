@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class DatabaseServiceService {
     // pal = {name: '1', description: 'shasd', date: 'sa'};
-    resturl = 'http://localhost:8880/';
+    resturl = 'http://localhost:8980/';
     constructor(private http: HttpClient) {
 
     }
@@ -70,5 +70,9 @@ export class DatabaseServiceService {
 
     getAllInventory(): Observable<any> {
       return this.http.get(this.resturl + 'inventory');
+    }
+
+    addInventory(products): Observable<any> {
+        return this.http.post(this.resturl + 'inventory', products);
     }
 }

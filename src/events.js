@@ -378,7 +378,7 @@ function createRouter(db) {
 
     router.post('/inventory', function(req, res, next) {
         db.query(
-            'Insert into inventory (idinventory, name, description,quantity,price,remark) VALUES (?,?,?,?,?,?)', [req.body.idinventory, req.body.name, req.body.description, req.body.quantity, req.body.price, req.body.remark], /* [req.params.id], */
+            'Insert into inventory (name, description,quantity,price,remark) VALUES (?,?,?,?,?)', [req.body.invname, req.body.invdisc, req.body.invqty, req.body.invprice, req.body.invprice], /* [req.params.id], */
             (error, results) => {
                 if (error) {
                     console.log(error);
