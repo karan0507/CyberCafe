@@ -10,9 +10,13 @@ import { Router } from '@angular/router';
 export class InventoryComponent implements OnInit {
 
   srno = 'SR NO';
-  invname = 'Inventory Names';
-  adduser = 'Add Inventory / Delete Inventory ';
+  name = 'Name';
+  description = 'description';
+  quantity = 'quantity';
+  price = 'Price';
+  remark = 'remark';
 
+ 
 
   inventory; // Inventory Object
   constructor(private db: DatabaseServiceService, private router: Router) { }
