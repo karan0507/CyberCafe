@@ -27,7 +27,7 @@ export class InventoryComponent implements OnInit {
       invdisc: ['', [Validators.required]],
       invqty: ['', [Validators.required]],
       invprice: ['', [Validators.required]],
-      c: ['', [Validators.required]]
+      invremark: ['', [Validators.required]]
 
   });
    }
