@@ -28,74 +28,36 @@
 
     <div class="row" style=" padding-right: 15%; padding-top: 5%;">
         <div class="col-sm-12">
-            <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
-                aria-describedby="example1_info">
+            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                 <thead>
                     <tr role="row">
 
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending" style="width: 143px;">
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 143px;">
                             {{srno | uppercase}}
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
                             {{invname | uppercase}}
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
                             {{invname | uppercase}}
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
                             {{invname | uppercase}}
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                            aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
+                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 101px;">
                             {{adduser | uppercase}}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    <tr>
-                        <td></td>
-                        <td>
-                            <div class="col-md-4  ng-autocomplete ">
-                                <ng-autocomplete [data]="newcust" [searchKeyword]="keyword"
-                                    (selected)="selectEvent($event)" placeHolder="Enter the  Name"
-                                    historyIdentifier="states" [itemTemplate]="itemTemplate"
-                                    [notFoundTemplate]="notFoundTemplate">
-                                </ng-autocomplete>
-
-                                <ng-template #itemTemplate let-item>
-                                    <div class="item">
-                                        <!-- <img src="{{item.flag}}" height="25"> -->
-                                        <span [innerHTML]="item.name"></span> &nbsp; &nbsp;<br>
-                                        <small>Phone Number: {{item.phone_no}} &nbsp; &nbsp;</small>
-                                    </div>
-                                </ng-template>
-
-
-                                <ng-template #notFoundTemplate let-notFound>
-                                    <div [innerHTML]="notFound"></div>
-                                </ng-template>
-                            </div>
-                        </td>
-                        
-
-
-                        <!-- <td> {{number}} </td>
-                        <td>{{bal | currency:'INR'}}</td> -->
-                        <!-- <td style="font-size: 47px;
-                    padding-left: 36px;">-</td>
-                    <td style="font-size: 47px;
-                    padding-left: 36px;">-</td> -->
-<td></td>
-<td></td>
-                        <td><button type="submit" class="btn btn-primary" (click)="addActiveUser()"
-                                [disabled]="!activeGroup.valid">Add User</button></td>
-
-
+                    <tr *ngFor="let item of inventory; index as i;">
+                        <td>{{i}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.description}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.remark}}</td>
                     </tr>
 
                     <!-- *ngFor="let customer of customers | filter:searchText; -->
@@ -130,18 +92,30 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Default Modal</h4>
+                <h4 class="modal-title">Add Products</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>One fine body&hellip;</p>
+                <label for="">Name</label>
+                <input type="text">
+                <label for="">Description</label>
+                <input type="text">
+                <label for="">Qty</label>
+                <input type="text">
+                <label for="">Price</label>
+                <input type="text" name="" id="">
+                <label for="">Remark</label>
+                <input type="text" name="" id="">
             </div>
-            <div class="modal-footer justify-content-between">
+            <div>
+                <input type="button" value="Add Product">
+            </div>
+            <!-- <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            </div> -->
         </div>
         <!-- /.modal-content -->
     </div>

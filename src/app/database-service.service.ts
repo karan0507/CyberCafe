@@ -67,4 +67,8 @@ export class DatabaseServiceService {
       return this.http.get(this.resturl + 'activeUsers');
     }
 
+
+    getAllInventory(): Observable<any> {
+      return this.http.get(this.resturl + 'inventory');
+    }
 }

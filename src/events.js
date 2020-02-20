@@ -358,6 +358,38 @@ function createRouter(db) {
         );
     });
 
+
+
+    // ---------------------------------------------------------------------------------
+
+    router.get('/inventory', function(req, res, next) {
+        db.query(
+            'SELECT * FROM inventory ',
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
+    router.post('/inventory', function(req, res, next) {
+        db.query(
+            'Insert into inventory (idinventory, name, description,quantity,price,remark) VALUES (?,?,?,?,?,?)', [req.body.idinventory, req.body.name, req.body.description, req.body.quantity, req.body.price, req.body.remark], /* [req.params.id], */
+            (error, results) => {
+                if (error) {
+                    console.log(error);
+                    res.status(500).json({ status: 'error' });
+                } else {
+                    res.status(200).json(results);
+                }
+            }
+        );
+    });
+
     return router;
 
 }
