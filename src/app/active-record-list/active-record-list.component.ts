@@ -76,6 +76,7 @@ export class ActiveRecordListComponent implements OnInit {
   ngOnInit() {
 
     // this.getActiveUsers();
+    this.getCustomers();
     this.cust = this.route.snapshot.data.user;
     console.log(this.cust);
   }
@@ -86,16 +87,16 @@ export class ActiveRecordListComponent implements OnInit {
 
 
   // onSelect retreives the selected item from the table and stores it as an object to be used.
-  onSelect(selectedItem: any) {
-    this.selecteduser = selectedItem;
-    this.aid = selectedItem.active_id;
-    const date = 'date2';
-    this.selecteduser[date] = new Date();
-    console.log('Selected item Id: ', selectedItem); // You get the Id of the selected item here
-  }
+  // onSelect(selectedItem: any) {
+  //   this.selecteduser = selectedItem;
+  //   this.aid = selectedItem.active_id;
+  //   // const date = 'date2';
+  //   // this.selecteduser[date] = new Date();
+  //   console.log('Selected item Id: ', selectedItem); // You get the Id of the selected item here
+  // }
 
   getCustomers() {
-    this.db.getCustomerWithLastTransaction().subscribe(data => {
+    this.db.getAllActiveUsers().subscribe(data => {
       console.log(data);
       this.customers = data;
 
@@ -119,11 +120,12 @@ export class ActiveRecordListComponent implements OnInit {
     console.log(this.selecteduser);
     this.db.addTransaction(this.selecteduser).subscribe(res => {
       console.log(res);
+      this.db.deleteActicveUser(this.aid).subscribe(res => {
+        console.log(res);
+        this.getCustomers();
+      });
     });
-    this.db.deleteActicveUser(this.aid).subscribe(res => {
-      console.log(res);
-      this.getAllUser();
-    });
+  
   }
 
 
@@ -139,7 +141,7 @@ export class ActiveRecordListComponent implements OnInit {
 
 
   selectEvent(item) {
-    this.selectedUser = item;
+    this.selecteduser = item;
     console.log('Selected item Id: ', item);
     this.number = item.phone_no;
     this.bal = item.bal;
@@ -164,7 +166,7 @@ export class ActiveRecordListComponent implements OnInit {
 
           this.db.addActiveUsers(this.selectedUser).subscribe(res2 => {
             this.getAllUser();
-            // this.getCustomers();
+            this.getCustomers();
             console.log(res2);
           });
 
