@@ -18,7 +18,6 @@ const routes: Routes = [
   }
 ];
 
- 4
 @NgModule({
   declarations: [ActiveRecordListComponent],
   imports: [
