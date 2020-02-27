@@ -89,7 +89,7 @@ export class ActiveRecordListComponent implements OnInit {
   // onSelect retreives the selected item from the table and stores it as an object to be used.
   // onSelect(selectedItem: any) {
   //   this.selecteduser = selectedItem;
-  //   this.aid = selectedItem.active_id;
+    // this.aid = selecteduser.active_id;
   //   // const date = 'date2';
   //   // this.selecteduser[date] = new Date();
   //   console.log('Selected item Id: ', selectedItem); // You get the Id of the selected item here
