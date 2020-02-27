@@ -164,7 +164,7 @@ export class ActiveRecordListComponent implements OnInit {
    // ! STOPED WORKING  STORY ID 178
   addActiveUser() {
 
-          this.db.addActiveUsers(this.selectedUser).subscribe(res2 => {
+          this.db.addActiveUsers(this.selecteduser).subscribe(res2 => {
             this.getAllUser();
             this.getCustomers();
             console.log(res2);
