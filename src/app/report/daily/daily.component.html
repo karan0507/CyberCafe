@@ -27,7 +27,7 @@
                 &nbsp;&nbsp; &nbsp;&nbsp; <label for="">Sort by transaction type: </label> &nbsp;&nbsp;
             </div>
             <div class="col-md-2">
-                <select class="form-control" (change)="onChange($event.target.value)">
+                <select class="form-control" (change)="onChange($event)">
                         <option >Select by Type</option>
                         <option *ngFor="let option of options" [value]="option"  >
                             {{ option }}

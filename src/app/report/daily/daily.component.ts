@@ -62,6 +62,8 @@ export class DailyComponent implements OnInit {
 
   onChange(selectedValue) {
     this.selectedValues$.next(selectedValue);
+    console.log(selectedValue.target.value);
+    this.getCustomerDetailsWithBalance();
   }
 
   // getCustomers() {
@@ -92,9 +94,8 @@ export class DailyComponent implements OnInit {
     //   console.log(content);
     // });
   }
-
-
-    getCustomerDetailsWithBalance() {
+ 
+  getCustomerDetailsWithBalance() {
       this.db.getCustTran(this.dayparam).subscribe(
         res => {
           this.customers = res;

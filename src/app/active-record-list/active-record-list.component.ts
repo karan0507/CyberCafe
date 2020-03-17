@@ -53,21 +53,22 @@ export class ActiveRecordListComponent implements OnInit {
   activeGroup: FormGroup;
   addUser: FormGroup;
   transaction;
-  options = ['UPI', 'PAYTM', 'CASH' , ' उधारी | BORROWED' , 'BANK TRANSFER', 'पैशे'];
+  options = ['UPI', 'PAYTM', 'CASH', ' उधारी | BORROWED', 'BANK TRANSFER', 'पैशे'];
   tid: any;
-  selectedUser:Array<any>;
+  selectedUser: Array<any>;
+  data: any;
 
   constructor(private db: DatabaseServiceService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.activeGroup = this.fb.group(
       { name: ['', [Validators.required]] });
 
 
-      // ! changed variable name to username for addUser formGroup
+    // ! changed variable name to username for addUser formGroup
     this.addUser = this.fb.group(
-        {
-          currentamt: ['', [Validators.required]],
-          paidamt: ['', [Validators.required]],
-          remark: ['', [Validators.required]]
+      {
+        currentamt: ['', [Validators.required]],
+        paidamt: ['', [Validators.required]],
+        remark: ['', [Validators.required]]
       });
 
 
@@ -76,7 +77,7 @@ export class ActiveRecordListComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.getActiveUsers();
+    this.getActiveUsers();
     this.getCustomers();
     this.cust = this.route.snapshot.data.user;
     console.log(this.cust);
@@ -89,11 +90,13 @@ export class ActiveRecordListComponent implements OnInit {
 
   // onSelect retreives the selected item from the table and stores it as an object to be used.
   onSelect(selectedItem: any) {
-    this.selectedUser = selectedItem;
-    // this.aid = this.selectedUser.active_id;
+    this.selecteduser = selectedItem;
+    // this.aid = this.selectedUser.aid;
     // const date = 'date2';
     // this.selecteduser[date] = new Date();
-    console.log('Selected item Id: ', selectedItem); // You get the Id of the selected item here
+    console.log('Selected item useer: ', selectedItem);
+    // You get the Id of the selected item here
+
   }
 
   getCustomers() {
@@ -114,10 +117,10 @@ export class ActiveRecordListComponent implements OnInit {
     // this.transaction['type'] = 'UPI';
     // this.transaction['cid'] = this.selecteduser['cust_id'];
     console.log('component transaction called');
-    this.selecteduser['type'] = 100;
-    this.selecteduser['credit_bal'] = 10;
-    this.selecteduser['debit_bal'] = 0;
-    this.selecteduser['bal'] = 90;
+    // this.selecteduser['type'] = 100;
+    // this.selecteduser['credit_bal'] = 10;
+    // this.selecteduser['debit_bal'] = 0;
+    // this.selecteduser['bal'] = 90;
     console.log(this.selecteduser);
     this.db.addTransaction(this.selecteduser).subscribe(res => {
       console.log(res);
@@ -126,24 +129,25 @@ export class ActiveRecordListComponent implements OnInit {
         this.getCustomers();
       });
     });
-  
+
   }
 
 
 
 
 
-  // getActiveUsers() {
-  //   this.db.getAllActiveUsers().subscribe(res => {
-  //     console.log(res);
-  //     this.customers = res;
-  //   });
-  // }
+  getActiveUsers() {
+    this.db.getAllActiveUsers().subscribe(res => {
+      console.log(res);
+      this.customers = res;
+    });
+  }
 
 
   selectEvent(item) {
     this.selectedUser = item;
     console.log('Selected item Id: ', item);
+    // console.log('Selected item user: ', this.selectedUser);
     this.number = item.phone_no;
     this.bal = item.bal;
     this.tid = item.tid;
@@ -162,20 +166,30 @@ export class ActiveRecordListComponent implements OnInit {
   }
 
 
-   // ? @Karan Make the required changes below
-   // ! STOPED WORKING  STORY ID 178
+  // ? @Karan Make the required changes below
+  // ! STOPED WORKING  STORY ID 178
+  // addActiveUser() {
+  //         // console.log(this.data);
+          // this.db.addActiveUsers(this.data).subscribe(res2 => {
+          //   this.getAllUser();
+          //   this.getCustomers();
+          //   console.log(res2);
+  //         });
+
+  //     }
   addActiveUser() {
-          console.log(this.data);
+    // this.db.getAllActiveUsers()
+    //   .subscribe(res => {
+    //     console.log(res);
+    //     res.map(obj => {
+    //       console.log(obj.tid);
           this.db.addActiveUsers(this.data).subscribe(res2 => {
             this.getAllUser();
             this.getCustomers();
             console.log(res2);
           });
 
-      }
-  data(data: any) {
-    throw new Error("Method not implemented.");
+        // });
+      // });
   }
-
-
 }
