@@ -99,6 +99,7 @@
 
                                 </tr>
                                 <tr role="row" class="odd" *ngFor="let customer of customers | filter:searchText; index as i;">
+                                    
                                     <td class="sorting_1">{{i}}</td>
                                     <td>{{customer.name | uppercase}}</td>
                                     <td>{{customer.phone_no}}</td>

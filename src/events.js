@@ -106,7 +106,7 @@ function createRouter(db) {
     router.get('/last_trans', function(req, res, next) {
         db.query(
             // SELECT id as cust_id,name,address,phone_no,email_address,max(tid) as maxtid, max(bal) as bal from customer INNER JOIN transaction on customer.id = transaction.cid group by customer.id;
-            'SELECT a.id, a.name, b.date, b.bal FROM customer a JOIN (SELECT b1.* FROM transaction b1 JOIN(SELECT cid, MAX(date) As maxdate FROM transaction GROUP BY cid) b2 ON b1.cid = b2.cid AND b1.date = b2.maxdate) b ON a.id = b.cid;',
+            'SELECT a.id, a.name,a.phone_no, b.date, b.bal, b.tid, b.cid FROM customer a JOIN (SELECT b1.* FROM transaction b1 JOIN(SELECT cid, MAX(date) As maxdate FROM transaction GROUP BY cid) b2 ON b1.cid = b2.cid AND b1.date = b2.maxdate) b ON a.id = b.cid;',
               /* [req.params.id] */
             (error, results) => {
                 if (error) {
@@ -292,7 +292,7 @@ function createRouter(db) {
 
     router.post('/addActiveUsers', function(req, res, next) {
         db.query(
-            'Insert into active_users (cust_id, tran_id, status) VALUES (?,?,"active")', [req.body.cust_id, req.body.maxtid], /* [req.params.id], */
+            'Insert into active_users (cust_id, tran_id, status) VALUES (?,?,"active")', [req.body.cid, req.body.tid], /* [req.params.id], */
             (error, results) => {
                 if (error) {
                     console.log(error);

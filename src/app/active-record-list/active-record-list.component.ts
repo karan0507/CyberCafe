@@ -47,7 +47,6 @@ export class ActiveRecordListComponent implements OnInit {
   @Output()
   now;
   custDate = 'date';
-  selectedUser: Array<any>;
   number;
   keyword = 'name';
   newcust: Array<any>;
@@ -55,6 +54,8 @@ export class ActiveRecordListComponent implements OnInit {
   addUser: FormGroup;
   transaction;
   options = ['UPI', 'PAYTM', 'CASH' , ' उधारी | BORROWED' , 'BANK TRANSFER', 'पैशे'];
+  tid: any;
+  selectedUser:Array<any>;
 
   constructor(private db: DatabaseServiceService, private route: ActivatedRoute, private fb: FormBuilder) {
     this.activeGroup = this.fb.group(
@@ -87,13 +88,13 @@ export class ActiveRecordListComponent implements OnInit {
 
 
   // onSelect retreives the selected item from the table and stores it as an object to be used.
-  // onSelect(selectedItem: any) {
-  //   this.selecteduser = selectedItem;
-  //   this.aid = selectedItem.active_id;
-  //   // const date = 'date2';
-  //   // this.selecteduser[date] = new Date();
-  //   console.log('Selected item Id: ', selectedItem); // You get the Id of the selected item here
-  // }
+  onSelect(selectedItem: any) {
+    this.selectedUser = selectedItem;
+    // this.aid = this.selectedUser.active_id;
+    // const date = 'date2';
+    // this.selecteduser[date] = new Date();
+    console.log('Selected item Id: ', selectedItem); // You get the Id of the selected item here
+  }
 
   getCustomers() {
     this.db.getAllActiveUsers().subscribe(data => {
@@ -141,10 +142,11 @@ export class ActiveRecordListComponent implements OnInit {
 
 
   selectEvent(item) {
-    this.selecteduser = item;
+    this.selectedUser = item;
     console.log('Selected item Id: ', item);
     this.number = item.phone_no;
     this.bal = item.bal;
+    this.tid = item.tid;
     //  this.address = item.address;
     this.getAllUser();
     // You get the Id of the selected item here
@@ -163,14 +165,17 @@ export class ActiveRecordListComponent implements OnInit {
    // ? @Karan Make the required changes below
    // ! STOPED WORKING  STORY ID 178
   addActiveUser() {
-
-          this.db.addActiveUsers(this.selectedUser).subscribe(res2 => {
+          console.log(this.data);
+          this.db.addActiveUsers(this.data).subscribe(res2 => {
             this.getAllUser();
             this.getCustomers();
             console.log(res2);
           });
 
       }
+  data(data: any) {
+    throw new Error("Method not implemented.");
+  }
 
 
 }
