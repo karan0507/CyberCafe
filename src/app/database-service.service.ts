@@ -44,7 +44,8 @@ export class DatabaseServiceService {
 
     getCustTran(dates): Observable<any> {
 
-       return this.http.get(this.resturl + 'cust_trans', dates );
+        console.log(dates);
+       return this.http.post(this.resturl + 'cust_trans', dates );
     }
     listAllCustomers(): Observable<any> {
         return this.http.get(this.resturl + 'customer');

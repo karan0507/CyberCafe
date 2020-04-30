@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
+// app.use(bodyParser.json());
+const moment = require('moment');
+// const params = require('param');
 io.on('connection', () => {
     console.log('a user is connected')
 })
@@ -172,7 +174,7 @@ function createRouter(db) {
 
     router.get('/customer/:id', function(req, res, next) {
         db.query(
-            'SELECT * max(tid) FROM customer WHERE id=? ', [req.params.id],
+            'SELECT * FROM customer WHERE id=? ', [req.params.id],
             (error, results) => {
                 if (error) {
                     console.log(error);
@@ -219,16 +221,18 @@ function createRouter(db) {
 
     // GET All Transactions By Particular Day
 
-    router.get('/cust_trans', function(req, res, next) {
-        console.log('cust_trans');
+    router.post('/cust_trans', function(req, res, next) {
+        console.log('cust_trans hello');
         db.query(
-            'SELECT * from transaction INNER JOIN customer on transaction.cid = customer.id where date >= ? and date < ?', [req.body.date, req.body.date2],
+            
+            'SELECT * from transaction INNER JOIN customer on transaction.cid = customer.id WHERE date >= ? ' , [req.body.Date],
+            console.log(req.body),
             (error, results) => {
                 if (error) {
                     console.log(error);
                     res.status(500).json({ status: 'error' });
                 } else {
-
+                    console.log(results);
                     res.status(200).json(results);
                 }
             }

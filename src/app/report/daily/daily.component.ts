@@ -36,8 +36,9 @@ export class DailyComponent implements OnInit {
   balance = 'आजची कॅश  | Credited Cash';
   remark = 'remark';
   date = moment();
+  date1 = new Date();  
 
-  tomorrow = moment(new Date(), 'DD/MM/YYYY').add(1, 'day');
+  today = {'today':moment().format('YYYY-MM-DD')};
   // tomorrow = Date.now() + Date.now();
   dayparam;
  // tomorrow = this.date + new Date().getDate();
@@ -51,9 +52,9 @@ export class DailyComponent implements OnInit {
   //  this.getCustomers();
   this.getCustomerDetailsWithBalance();
   // this.tomorrow.setDate(this.tomorrow.getDate() + 1);
-
-  this.dayparam = { date: this.date.toDate().toISOString(), date2: this.tomorrow.toDate().toISOString() };
-  console.log(this.dayparam);
+  console.log(this.today);
+  // this.dayparam = { date: this.date.toDate().toISOString(), date2: this.tomorrow.toDate().toISOString() };
+  // console.log(this.dayparam);
   }
 
   onKey(event: any) { // without type info
@@ -96,8 +97,9 @@ export class DailyComponent implements OnInit {
   }
  
   getCustomerDetailsWithBalance() {
-      this.db.getCustTran(this.dayparam).subscribe(
+      this.db.getCustTran(this.today).subscribe(
         res => {
+          
           this.customers = res;
           console.log(res);
         });
