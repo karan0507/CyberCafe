@@ -31,7 +31,7 @@
     "file-system": "^2.2.2",
     "http": "0.0.0",
     "jquery": "^3.4.1",
-    "knex": "^0.20.10",
+    "knex": "^2.4.0",
     "moment": "^2.24.0",
     "mysql": "github:mysqljs/mysql",
     "mysql2": "^2.1.0",
